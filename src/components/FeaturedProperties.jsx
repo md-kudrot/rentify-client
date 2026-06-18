@@ -1,7 +1,6 @@
 import React from "react"
+import { ArrowRight } from "@gravity-ui/icons"
 import PropertyCard from "./PropertyCard"
-// import PropertyCard from "./PropertyCard"
-// import Icon from './Icon';
 
 export default function FeaturedProperties() {
     const properties = [
@@ -90,7 +89,7 @@ export default function FeaturedProperties() {
                 </div>
                 <a className="text-[#ffb77e] hover:underline text-[14px] font-medium flex items-center gap-1" href="#">
                     View all
-                    {/* <Icon name="arrow_forward" size={14} /> */}
+                    <ArrowRight width={14} height={14} />
                 </a>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
