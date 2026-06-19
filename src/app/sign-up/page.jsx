@@ -35,6 +35,12 @@ export default function SignUpPage() {
         }
     }
 
+    const handleGoogleSignIn = async () => {
+        await authClient.signIn.social({
+            provider: "google"
+        })
+    }
+
     return (
         <div className="min-h-screen flex items-center justify-center bg-[#0B1120] p-4 relative overflow-hidden">
             {/* Background ambient decorations */}
@@ -177,7 +183,10 @@ export default function SignUpPage() {
                     </div>
 
                     <div className="flex gap-4">
-                        <button className="flex-1 h-12 flex items-center justify-center gap-2 border border-[#534438]/30 rounded-xl bg-[#19120d] hover:bg-[#3f465c]/20 transition-colors text-[#efe0d7] font-medium">
+                        <button
+                            onClick={handleGoogleSignIn}
+                            className="flex-1 h-12 flex items-center justify-center cursor-pointer gap-2 border border-[#534438]/30 rounded-xl bg-[#19120d] hover:bg-[#3f465c]/20 transition-colors text-[#efe0d7] font-medium"
+                        >
                             <svg width="18" height="18" viewBox="0 0 24 24">
                                 <path
                                     fill="#4285F4"
