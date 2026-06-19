@@ -3,7 +3,7 @@ import { Globe, Envelope, ArrowUpRightFromSquare, PaperPlane } from "@gravity-ui
 
 export default function Footer() {
     return (
-        <footer className="bg-[#130d08] border-t border-[#534438]/10 rounded-t-[32px] mt-20">
+        <footer className="bg-[#130d08] border-t border-[#534438]/10 rounded-t-[32px] ">
             <div className="w-full py-20 px-6 grid grid-cols-1 md:grid-cols-4 gap-10 max-w-[1280px] mx-auto">
                 <div className="space-y-4">
                     <h2 className="text-[32px] font-bold text-[#ffb77e]">Rentora</h2>

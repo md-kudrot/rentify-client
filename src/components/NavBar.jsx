@@ -32,13 +32,39 @@ export default function Navbar() {
                 </div>
                 <nav className="hidden md:flex gap-6">{navLinks}</nav>
                 <div className="flex items-center gap-2">
-                    <div className="h-10 w-10 rounded-full bg-[#3c332d] border border-[#a18d7f]/20 overflow-hidden cursor-pointer active:scale-95 transition-all">
-                        <img
-                            className="w-full h-full object-cover"
-                            alt="Alexander Hunt Profile"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxcaL9xsIW9BWzrexG2_wl1RRl44-DATHR7ecn_QXSP250DvJA7vWIo781vS0SwwRzJ_TAwyLbEPpLRIXy85hEInss5v32GXCv5tYWLF7h6uH4a8xxnqptRDg2Vb32owHexnhI5Wizpy0RbHzpnDUIVW0HNPXSceWmgLMVeleV_wF8x7_rMDeGyDk_iT6TwxD494WTI0m8JjzF21XC39mTJC5KXvUirThMkhYddg01Ekh0y-r2rqn5fsKmj9TY3FB_u9n0KfsUhog"
-                        />
+                    <div className="hidden  gap-4">
+                        <div className="h-10 w-10 rounded-full bg-[#3c332d] border border-[#a18d7f]/20 overflow-hidden cursor-pointer active:scale-95 transition-all">
+                            <img
+                                className="w-full h-full object-cover"
+                                alt="Alexander Hunt Profile"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxcaL9xsIW9BWzrexG2_wl1RRl44-DATHR7ecn_QXSP250DvJA7vWIo781vS0SwwRzJ_TAwyLbEPpLRIXy85hEInss5v32GXCv5tYWLF7h6uH4a8xxnqptRDg2Vb32owHexnhI5Wizpy0RbHzpnDUIVW0HNPXSceWmgLMVeleV_wF8x7_rMDeGyDk_iT6TwxD494WTI0m8JjzF21XC39mTJC5KXvUirThMkhYddg01Ekh0y-r2rqn5fsKmj9TY3FB_u9n0KfsUhog"
+                            />
+                        </div>
+
+                        {/* log out */}
+                        <button className="cursor-pointer text-[#ffb77e] border border-[#ffb77e] font-medium text-[14px] hover:bg-[#ffb77e] hover:text-[#0B1120] px-2 rounded-sm transition-colors">
+                            Logout
+                        </button>
                     </div>
+
+                    {/* sign in */}
+                    <Link
+                        href="/sign-in"
+                        className="text-[#ffb77e] border border-[#ffb77e] font-medium text-[14px] hover:bg-[#ffb77e] hover:text-[#0B1120] px-2 rounded-sm transition-colors"
+                    >
+                        Sign In
+                    </Link>
+                    <Link
+                        href="/sign-up"
+                        className="text-[#ffb77e] border border-[#ffb77e] font-medium text-[14px] hover:bg-[#ffb77e] hover:text-[#0B1120] px-2 rounded-sm transition-colors"
+                    >
+                        Sign Up
+                    </Link>
+                </div>
+            </div>
+            <div className="md:hidden bg-transparent backdrop-blur-xl border-t border-[#534438]/10 shadow-sm">
+                <div className="flex justify-around items-center px-6 h-16 w-full max-w-[1280px] mx-auto">
+                    {navLinks}
                 </div>
             </div>
         </header>

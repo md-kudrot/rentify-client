@@ -1,12 +1,16 @@
 // import React from 'react';
 // import Icon from './Icon';
 import { LocationArrow } from "@gravity-ui/icons"
+import Link from "next/link"
 
-export default function PropertyCard({ title, price, location, beds, baths, sqft, imageSrc, badge }) {
+export default function PropertyCard({ id, title, price, location, beds, baths, sqft, imageSrc, badge }) {
     const badgeBg = badge === "FEATURED" ? "bg-[#cd7e39]" : "bg-[#139fb3]"
 
     return (
-        <div className="bg-[#3f465c]/20 rounded-[32px] overflow-hidden border border-[#534438]/10 group cursor-pointer copper-glow transition-all duration-500">
+        <Link
+            href={`/properties/${id}`}
+            className="bg-[#3f465c]/20 rounded-[32px] overflow-hidden border border-[#534438]/10 group cursor-pointer copper-glow transition-all duration-500"
+        >
             <div className="h-64 relative overflow-hidden">
                 <img
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
@@ -49,7 +53,7 @@ export default function PropertyCard({ title, price, location, beds, baths, sqft
                     </span>
                 </div>
             </div>
-        </div>
+        </Link>
     )
 }
 

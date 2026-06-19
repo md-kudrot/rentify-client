@@ -79,7 +79,7 @@ export default function FeaturedProperties() {
     ]
 
     return (
-        <section className="py-20 max-w-[1280px] mx-auto px-6">
+        <section className="py-20 max-w-[1280px]  mx-auto px-6">
             <div className="flex justify-between items-end mb-10">
                 <div>
                     <p className="text-[#ffb77e] text-[14px] font-medium tracking-[0.05em] tracking-widest uppercase mb-2">

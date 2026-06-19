@@ -3,6 +3,9 @@ import React from "react"
 import Footer from "@/components/Footer"
 // import BottomNavBar from '@/components/BottomNavBar';
 import PropertyCard from "@/components/PropertyCard"
+import Link from "next/link"
+import { Button } from "@heroui/react"
+import { ArrowLeft } from "@gravity-ui/icons"
 // import Icon from "@/components/Icon"
 
 const properties = [
@@ -82,14 +85,24 @@ const properties = [
 
 export default function PropertiesPage() {
     return (
-        <div className="bg-[#0B1120] text-white min-h-screen text-[16px] overflow-x-hidden">
+        <div className="bg-[#0B1120] text-white min-h-screen text-[16px] md:pt-0 pt-20 overflow-x-hidden">
             {/* <Navbar /> */}
 
             <main className="pt-24 pb-20 px-6 max-w-[1280px] mx-auto flex flex-col lg:flex-row gap-6">
                 {/* Sidebar Filters (Desktop) */}
                 <aside className="hidden lg:block w-72 shrink-0">
                     <div className="sticky top-24 space-y-6">
-                        <div className="flex items-center gap-2 text-[#ffb77e] mb-4">
+                        <div className="flex flex-col  gap-2 text-[#ffb77e] mb-4">
+                            {/* back */}
+                            <Button
+                                className="text-[#ffb77e] hover:underline bg-transparent border-none px-0"
+                                variant="text"
+                            >
+                                <Link href="/" className="text-[#ffb77e] flex items-center gap-2 hover:underline">
+                                    <ArrowLeft></ArrowLeft> Back
+                                </Link>
+                            </Button>
+
                             {/* <Icon name="tune" size={24} className="text-[#ffb77e]" /> */}
                             <h2 className="font-bold text-[24px]">Filters</h2>
                         </div>

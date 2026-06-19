@@ -4,7 +4,7 @@ import { LocationArrow, House, CreditCard, Magnifier } from "@gravity-ui/icons"
 
 export default function Hero() {
     return (
-        <section className="relative min-h-screen flex items-center justify-center pt-16">
+        <section className="relative min-h-screen flex items-center justify-center md:pt-16 pt-28">
             <div className="absolute inset-0 z-0">
                 <div className="absolute inset-0 bg-gradient-to-b from-[#0B1120]/40 via-[#0B1120]/60 to-[#0B1120] z-10"></div>
                 <img
