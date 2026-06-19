@@ -4,11 +4,34 @@ import React, { useState } from "react"
 // import Icon from "@/components/Icon";
 import NextLink from "next/link"
 import { motion } from "framer-motion"
+import { authClient } from "@/lib/auth-client"
+import { redirect } from "next/navigation"
 
 export default function SignUpPage() {
     const [isVisible, setIsVisible] = useState(false)
 
     const toggleVisibility = () => setIsVisible(!isVisible)
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        const formData = new FormData(e.currentTarget)
+        const user = Object.fromEntries(formData.entries())
+        // console.log("User data:", user)
+
+        const { data, error } = await authClient.signUp.email({
+            name: user.name,
+            email: user.email,
+            password: user.password
+        })
+        if (data) {
+            console.log("signup success ")
+            redirect("/")
+        }
+
+        if (error) {
+            alert("signup error " + error.message)
+        }
+    }
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-[#0B1120] p-4 relative overflow-hidden">
@@ -30,7 +53,7 @@ export default function SignUpPage() {
                         <p className="text-[#d9c2b3] mt-2 text-sm">Join us and start your journey</p>
                     </div>
 
-                    <form className="flex flex-col gap-4 mt-2" onSubmit={(e) => e.preventDefault()}>
+                    <form className="flex flex-col gap-4 mt-2" onSubmit={handleSubmit}>
                         <div className="flex flex-col gap-2">
                             <label className="text-sm font-medium text-[#efe0d7]">Full Name</label>
                             <div className="relative">
@@ -38,6 +61,7 @@ export default function SignUpPage() {
                                     autoFocus
                                     placeholder="Enter your full name"
                                     type="text"
+                                    name="name"
                                     className="w-full bg-[#19120d] border border-[#534438]/30 rounded-xl h-12 pl-10 pr-4 text-[#efe0d7] focus:border-[#ffb77e] outline-none placeholder:text-[#534438]/60 transition-colors"
                                 />
                                 <div className="absolute left-3 top-1/2 -translate-y-1/2 z-10">
@@ -52,6 +76,7 @@ export default function SignUpPage() {
                                 <input
                                     placeholder="Enter your email"
                                     type="email"
+                                    name="email"
                                     className="w-full bg-[#19120d] border border-[#534438]/30 rounded-xl h-12 pl-10 pr-4 text-[#efe0d7] focus:border-[#ffb77e] outline-none placeholder:text-[#534438]/60 transition-colors"
                                 />
                                 <div className="absolute left-3 top-1/2 -translate-y-1/2 z-10">
@@ -66,6 +91,7 @@ export default function SignUpPage() {
                                 <input
                                     placeholder="Create a password"
                                     type={isVisible ? "text" : "password"}
+                                    name="password"
                                     className="w-full bg-[#19120d] border border-[#534438]/30 rounded-xl h-12 pl-10 pr-10 text-[#efe0d7] focus:border-[#ffb77e] outline-none placeholder:text-[#534438]/60 transition-colors"
                                 />
                                 <div className="absolute left-3 top-1/2 -translate-y-1/2 z-10">
@@ -113,7 +139,7 @@ export default function SignUpPage() {
                         </div>
 
                         <button
-                            className="copper-gradient w-full h-12 rounded-xl font-semibold text-white shadow-lg mt-2 copper-glow transition-all"
+                            className="copper-gradient bg-[#ffb77e] cursor-pointer w-full h-12 rounded-xl font-semibold text-white shadow-lg mt-2 copper-glow transition-all"
                             type="submit"
                         >
                             Sign Up
