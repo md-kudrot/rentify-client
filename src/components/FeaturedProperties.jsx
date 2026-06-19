@@ -1,6 +1,7 @@
 import React from "react"
 import { ArrowRight } from "@gravity-ui/icons"
 import PropertyCard from "./PropertyCard"
+import Link from "next/link"
 
 export default function FeaturedProperties() {
     const properties = [
@@ -87,10 +88,13 @@ export default function FeaturedProperties() {
                     </p>
                     <h3 className="text-[32px] font-semibold leading-[1.3] text-white">Featured Properties</h3>
                 </div>
-                <a className="text-[#ffb77e] hover:underline text-[14px] font-medium flex items-center gap-1" href="#">
+                <Link
+                    href="/properties"
+                    className="text-[#ffb77e] hover:underline text-[14px] font-medium flex items-center gap-1"
+                >
                     View all
                     <ArrowRight width={14} height={14} />
-                </a>
+                </Link>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {properties.map((property) => (
