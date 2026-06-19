@@ -23,7 +23,8 @@ export default function SignUpPage() {
             name: user.name,
             email: user.email,
             password: user.password,
-            image: user.image
+            image: user.image,
+            role: "Tenant"
         })
         if (data) {
             console.log("signup success ")
