@@ -18,7 +18,7 @@ export default function NotFound() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
-                className="w-full max-w-lg z-10 text-center"
+                className="w-[30%] z-10 text-center"
             >
                 <div className="glass-panel rounded-[32px] p-12 w-full flex flex-col items-center gap-6">
                     {/* <div className="w-24 h-24 rounded-full bg-[#19120d] border border-[#534438]/30 flex items-center justify-center mb-2 shadow-[0_0_30px_rgba(201,123,54,0.15)]">
@@ -37,7 +37,7 @@ export default function NotFound() {
                             404
                         </h1>
                         <h2 className="text-[24px] font-semibold text-white mt-4">Page Not Found</h2>
-                        <p className="text-[#d9c2b3] mt-3 text-base max-w-sm mx-auto leading-relaxed">
+                        <p className="text-[#d9c2b3] mt-3 text-base  mx-auto leading-relaxed">
                             The luxury estate you are looking for seems to have vanished off the map, or perhaps the
                             link is broken.
                         </p>

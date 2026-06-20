@@ -16,6 +16,8 @@ export default function Navbar() {
     console.log(session?.user)
     const user = session?.user
 
+    console.log("user roll", user?.role)
+
     const handleSignOut = async () => {
         await authClient.signOut({
             fetchOptions: {
@@ -71,6 +73,8 @@ export default function Navbar() {
                                     }
                                 />
                             </div>
+
+                            <Link href={`/dashboard/${user?.role}`}>Dashboard</Link>
 
                             {/* log out */}
                             <button

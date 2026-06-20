@@ -23,7 +23,7 @@ export const auth = betterAuth({
         additionalFields: {
             role: {
                 type: "string",
-                defaultValue: "Tenant",
+                defaultValue: "tenant",
                 required: false
             }
         }

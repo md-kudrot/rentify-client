@@ -1,2 +1,97 @@
 @import "tailwindcss";
 @import "@heroui/styles";
+
+@import "tailwindcss";
+
+@theme {
+    --color-on-tertiary-container: #002f36;
+    --color-tertiary-fixed: #a1efff;
+    --color-on-primary-fixed-variant: #6e3900;
+    --color-outline-variant: #534438;
+    --color-tertiary-container: #139fb3;
+    --color-on-secondary-container: #adb4ce;
+    --color-surface-container-highest: #3c332d;
+    --color-inverse-primary: #904d06;
+    --color-surface-bright: #403731;
+    --color-on-tertiary-fixed: #001f25;
+    --color-on-secondary: #283044;
+    --color-outline: #a18d7f;
+    --color-on-surface: #efe0d7;
+    --color-on-secondary-fixed-variant: #3f465c;
+    --color-inverse-surface: #efe0d7;
+    --color-error-container: #93000a;
+    --color-secondary-container: #3f465c;
+    --color-secondary-fixed: #dae2fd;
+    --color-on-secondary-fixed: #131b2e;
+    --color-surface-variant: #3c332d;
+    --color-secondary-fixed-dim: #bec6e0;
+    --color-inverse-on-surface: #372f29;
+    --color-surface-container-high: #302823;
+    --color-on-background: #efe0d7;
+    --color-on-error-container: #ffdad6;
+    --color-primary-container: #cd7e39;
+    --color-error: #ffb4ab;
+    --color-on-error: #690005;
+    --color-surface-dim: #19120d;
+    --color-secondary: #bec6e0;
+    --color-primary-fixed: #ffdcc3;
+    --color-background: #19120d;
+    --color-on-tertiary-fixed-variant: #004e59;
+    --color-surface-container-lowest: #130d08;
+    --color-surface-container-low: #211a15;
+    --color-surface-container: #261e19;
+    --color-on-tertiary: #00363e;
+    --color-on-primary-container: #442100;
+    --color-primary-fixed-dim: #ffb77e;
+    --color-surface-tint: #ffb77e;
+    --color-tertiary: #64d6eb;
+    --color-tertiary-fixed-dim: #64d6eb;
+    --color-on-primary-fixed: #2f1500;
+    --color-on-surface-variant: #d9c2b3;
+    --color-on-primary: #4d2600;
+    --color-surface: #19120d;
+    --color-primary: #ffb77e;
+
+    --radius-DEFAULT: 0.25rem;
+    --radius-lg: 0.5rem;
+    --radius-xl: 0.75rem;
+    --radius-xxl: 2rem;
+    --radius-full: 9999px;
+
+    --spacing-xs: 4px;
+    --spacing-xxl: 80px;
+    --spacing-xl: 40px;
+    --spacing-md: 16px;
+    --spacing-sm: 8px;
+    --spacing-base: 4px;
+    --spacing-container-max: 1280px;
+    --spacing-gutter: 24px;
+    --spacing-lg: 24px;
+
+    --font-display-lg: "Plus Jakarta Sans", sans-serif;
+    --font-label-md: "Plus Jakarta Sans", sans-serif;
+    --font-body-lg: "Plus Jakarta Sans", sans-serif;
+    --font-headline-md: "Plus Jakarta Sans", sans-serif;
+    --font-display-lg-mobile: "Plus Jakarta Sans", sans-serif;
+    --font-headline-lg: "Plus Jakarta Sans", sans-serif;
+    --font-body-md: "Plus Jakarta Sans", sans-serif;
+}
+
+/* Base custom overrides */
+body {
+    background-color: #0b1120;
+    color: #efe0d7;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #0b1120;
+}
+::-webkit-scrollbar-thumb {
+    background: #c97b36;
+    border-radius: 10px;
+}
+
