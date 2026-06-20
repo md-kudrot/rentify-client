@@ -43,7 +43,9 @@ export default function DashboardSidebar({ role = "owner" }) {
     const navContent = (
         <div className="flex flex-col h-full bg-surface-container border-r border-outline-variant/10">
             <div className="p-lg h-16 flex items-center justify-between overflow-hidden whitespace-nowrap">
-                <span className="font-display-lg text-headline-md tracking-tight text-primary">Rentora</span>
+                <Link href="/" className="font-display-lg text-headline-md tracking-tight text-primary">
+                    Rentora
+                </Link>
             </div>
 
             <nav className="px-md py-lg flex flex-col gap-1 flex-1 overflow-y-auto custom-scrollbar overflow-x-hidden">

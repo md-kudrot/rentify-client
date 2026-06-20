@@ -2,8 +2,19 @@
 
 import DashboardSidebar from "@/../src/components/dashboard/DashboardSidebar"
 import DashboardHeader from "@/../src/components/dashboard/DashboardHeader"
+import { authClient } from "@/lib/auth-client"
 
-export default function DashboardLayout({ children, role = "tenant" }) {
+export default function DashboardLayout({ children }) {
+    const {
+        data: session,
+        isPending, //loading state
+        error, //error object
+        refetch //refetch the session
+    } = authClient.useSession()
+
+    // console.log(session?.user.role)
+    const role = session?.user?.role || "tenant" 
+
     return (
         <div className="h-screen w-full relative flex flex-col md:flex-row bg-background font-body-md overflow-x-hidden">
             <div className=" h-full md:h-auto">
