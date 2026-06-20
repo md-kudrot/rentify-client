@@ -1,7 +1,16 @@
+"use client"
 import React from "react"
 import { Globe, Envelope, ArrowUpRightFromSquare, PaperPlane } from "@gravity-ui/icons"
+import { usePathname } from "next/navigation"
 
 export default function Footer() {
+    const pathname = usePathname()
+    // console.log(pathname)
+
+    if (pathname.includes("/dashboard")) {
+        return null
+    }
+
     return (
         <footer className="bg-[#130d08] border-t border-[#534438]/10 rounded-t-[32px] ">
             <div className="w-full py-20 px-6 grid grid-cols-1 md:grid-cols-4 gap-10 max-w-[1280px] mx-auto">

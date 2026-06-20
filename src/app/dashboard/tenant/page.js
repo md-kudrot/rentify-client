@@ -1,4 +1,3 @@
-import DashboardLayout from "@/../src/app/dashboard/layout"
 import SummaryCards from "@/components/dashboard/SummaryCards"
 import Icon from "@/components/Icon"
 
@@ -48,7 +47,7 @@ export default function TenantDashboard() {
     ]
 
     return (
-        <DashboardLayout role="tenant">
+        <>
             <SummaryCards cards={summaryCards} />
 
             <section className="grid grid-cols-1 lg:grid-cols-2 gap-lg mt-lg">
@@ -102,7 +101,7 @@ export default function TenantDashboard() {
                     </div>
                 </div>
             </section>
-        </DashboardLayout>
+        </>
     )
 }
 

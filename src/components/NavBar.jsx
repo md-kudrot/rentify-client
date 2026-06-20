@@ -3,9 +3,16 @@ import React from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { authClient } from "@/lib/auth-client"
-import { redirect } from "next/navigation"
+import { redirect, usePathname } from "next/navigation"
 
 export default function Navbar() {
+    const pathname = usePathname()
+    // console.log(pathname)
+
+    if (pathname.includes("/dashboard")) {
+        return null
+    }
+
     const {
         data: session,
         isPending, //loading state
