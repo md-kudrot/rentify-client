@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useState } from "react"
-// import Icon from '../Icon';
+import Icon from "../Icon"
 
 export default function PropertyHeader() {
     const [isFavorited, setIsFavorited] = useState(false)
@@ -23,7 +23,7 @@ export default function PropertyHeader() {
                         Premium Estate
                     </span>
                     <div className="flex items-center gap-1 text-[#ffb77e]">
-                        {/* <Icon name="star_filled" size={16} /> */}
+                        <Icon name="star_filled" size={16} />
                         <span className="font-bold text-[14px]">4.98</span>
                         <span className="text-[#d9c2b3] font-normal text-[14px] ml-1">(124 reviews)</span>
                     </div>
@@ -32,7 +32,7 @@ export default function PropertyHeader() {
                     The Copper Meridian Villa
                 </h2>
                 <div className="flex items-center gap-1 text-[#d9c2b3]">
-                    {/* <Icon name="location_on" size={20} className="text-[#ffb77e]" /> */}
+                    <Icon name="location_on" size={20} className="text-[#ffb77e]" />
                     <span className="text-[16px]">Beverly Hills, California</span>
                 </div>
             </div>
@@ -41,14 +41,14 @@ export default function PropertyHeader() {
                     onClick={toggleFavorite}
                     className="w-12 h-12 rounded-full border border-[#534438]/30 flex items-center justify-center text-[#ffb77e] hover:bg-[#ffb77e]/5 transition-all group active:scale-90 relative"
                 >
-                    {/* <Icon 
-            name={isFavorited ? "favorite_filled" : "favorite"} 
-            size={20} 
-            className={`group-hover:scale-110 transition-transform ${animateHeart ? "animate-ping" : ""}`} 
-          /> */}
+                    <Icon
+                        name={isFavorited ? "favorite_filled" : "favorite"}
+                        size={20}
+                        className={`group-hover:scale-110 transition-transform ${animateHeart ? "animate-ping" : ""}`}
+                    />
                 </button>
                 <button className="w-12 h-12 rounded-full border border-[#534438]/30 flex items-center justify-center text-[#d9c2b3] hover:text-[#ffb77e] transition-all active:scale-90">
-                    {/* <Icon name="ios_share" size={20} /> */}
+                    <Icon name="ios_share" size={20} />
                 </button>
             </div>
         </div>

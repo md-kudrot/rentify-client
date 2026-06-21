@@ -1,5 +1,5 @@
 import React from "react"
-// import Icon from '../Icon';
+import Icon from '../Icon';
 
 export default function HostCard() {
     return (
@@ -12,7 +12,7 @@ export default function HostCard() {
                 />
                 <div className="absolute -bottom-2 -right-2 bg-[#ffb77e] rounded-full p-1 border-4 border-[#3c332d]">
                     <span className="text-[#efe0d7] flex items-center justify-center">
-                        {/* <Icon name="verified" size={14} className="text-black" /> */}
+                        <Icon name="verified" size={14} className="text-black" />
                     </span>
                 </div>
             </div>

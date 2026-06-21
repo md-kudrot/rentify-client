@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useState } from "react"
-// import Icon from '../Icon';
+import Icon from "../Icon"
 
 export default function AboutSection() {
     const [isExpanded, setIsExpanded] = useState(false)
@@ -31,7 +31,7 @@ export default function AboutSection() {
                 className="mt-4 text-[#ffb77e] font-bold flex items-center gap-1.5 hover:gap-3 transition-all cursor-pointer"
             >
                 <span>{isExpanded ? "Read less" : "Read more"}</span>
-                {/* <Icon name="arrow_forward" size={16} /> */}
+                <Icon name="arrow_forward" size={16} />
             </button>
         </section>
     )
