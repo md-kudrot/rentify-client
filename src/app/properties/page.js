@@ -89,7 +89,7 @@ export default async function PropertiesPage() {
     const { token } = await auth.api.getToken({
         headers: await headers()
     })
-    console.log("Token in details page from Ideas:", token)
+    // console.log("Token in details page from Ideas:", token)
 
     let allProperties = []
     try {

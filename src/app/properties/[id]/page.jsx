@@ -8,12 +8,21 @@ import AmenitiesSection from "@/components/details/AmenitiesSection"
 import HostCard from "@/components/details/HostCard"
 import ReviewsSection from "@/components/details/ReviewsSection"
 import BookingCard from "@/components/details/BookingCard"
+import { auth } from "@/lib/auth"
+import { headers } from "next/headers"
 
 export default async function PropertyDetailsPage({ params }) {
     const { id } = await params
 
+    const { token } = await auth.api.getToken({
+        headers: await headers()
+    })
+
     const res = await fetch(`${process.env.SERVER_URL}/api/properties/${id}`, {
-        cache: "no-store"
+        cache: "no-store",
+        headers: {
+            authorization: `Bearer ${token}`
+        }
     })
 
     if (!res.ok) {
