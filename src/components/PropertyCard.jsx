@@ -3,12 +3,12 @@
 import { LocationArrow } from "@gravity-ui/icons"
 import Link from "next/link"
 
-export default function PropertyCard({ id, title, price, location, beds, baths, sqft, imageSrc, badge }) {
+export default function PropertyCard({ _id, title, price, location, beds, baths, sqft, imageSrc, badge }) {
     const badgeBg = badge === "FEATURED" ? "bg-[#cd7e39]" : "bg-[#139fb3]"
 
     return (
         <Link
-            href={`/properties/${id}`}
+            href={`/properties/${_id}`}
             className="bg-[#3f465c]/20 rounded-[32px] overflow-hidden border border-[#534438]/10 group cursor-pointer copper-glow transition-all duration-500"
         >
             <div className="h-64 relative overflow-hidden">
