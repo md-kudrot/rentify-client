@@ -31,7 +31,7 @@ export default function ReviewsSection() {
               </div>
             </div>
             <p className="text-[#d9c2b3] text-[16px] italic leading-relaxed">
-              "{rev.comment}"
+              {rev.comment}
             </p>
           </div>
         ))}

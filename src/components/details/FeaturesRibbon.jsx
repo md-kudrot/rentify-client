@@ -1,12 +1,12 @@
 import React from "react"
 import Icon from "../Icon"
 
-export default function FeaturesRibbon() {
+export default function FeaturesRibbon({ property }) {
     const features = [
-        { label: "Bedrooms", value: "6", icon: "king_bed" },
-        { label: "Bathrooms", value: "4.5", icon: "bathtub" },
-        { label: "Sq Ft", value: "8,400", icon: "square_foot" },
-        { label: "Parking", value: "4", icon: "directions_car" }
+        { label: "Bedrooms", value: property?.beds || "6", icon: "king_bed" },
+        { label: "Bathrooms", value: property?.baths || "4", icon: "bathtub" },
+        { label: "Sq Ft", value: property?.sqft || "8,400", icon: "square_foot" }
+        // { label: "Parking", value: property?.parking || "4", icon: "directions_car" }
     ]
 
     return (

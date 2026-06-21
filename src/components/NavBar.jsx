@@ -20,10 +20,10 @@ export default function Navbar() {
         refetch //refetch the session
     } = authClient.useSession()
 
-    console.log(session?.user)
+    // console.log(session?.user)
     const user = session?.user
 
-    console.log("user roll", user?.role)
+    // console.log("user roll", user?.role)
 
     const handleSignOut = async () => {
         await authClient.signOut({
