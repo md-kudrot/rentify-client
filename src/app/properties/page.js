@@ -7,6 +7,8 @@ import Link from "next/link"
 import { Button } from "@heroui/react"
 import { ArrowLeft } from "@gravity-ui/icons"
 import Icon from "@/components/Icon"
+import { auth } from "@/lib/auth"
+import { headers } from "next/headers"
 
 // const properties = [
 //     {
@@ -84,9 +86,20 @@ import Icon from "@/components/Icon"
 // ]
 
 export default async function PropertiesPage() {
+    const { token } = await auth.api.getToken({
+        headers: await headers()
+    })
+    console.log("Token in details page from Ideas:", token)
+
     let allProperties = []
     try {
-        const res = await fetch(`${process.env.Server_URL}/api/properties`)
+        // const res = await fetch(`${process.env.Server_URL}/api/properties`)
+        const res = await fetch(`${process.env.Server_URL}/api/properties`, {
+            cache: "no-store",
+            headers: {
+                authorization: `Bearer ${token}`
+            }
+        })
         allProperties = await res.json()
         console.log(allProperties)
     } catch (error) {

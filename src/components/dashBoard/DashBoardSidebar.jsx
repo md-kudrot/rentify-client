@@ -24,10 +24,9 @@ export default function DashboardSidebar({ role = "owner" }) {
         ],
         tenant: [
             { name: "Dashboard", href: "/dashboard/tenant", icon: "dashboard" },
-            { name: "My Rentals", href: "/dashboard/tenant/rentals", icon: "home" },
-            { name: "Payments", href: "/dashboard/tenant/payments", icon: "payments" },
-            { name: "Maintenance", href: "/dashboard/tenant/maintenance", icon: "build" },
-            { name: "Settings", href: "/dashboard/tenant/settings", icon: "settings" }
+            { name: "My Bookings", href: "/dashboard/tenant/my-bookings", icon: "home" },
+            { name: "Favorites", href: "/dashboard/tenant/favorites", icon: "favorite" },
+            { name: "Profile", href: "/dashboard/tenant/profile", icon: "person" },
         ],
         admin: [
             { name: "Dashboard", href: "/dashboard/admin", icon: "dashboard" },
@@ -129,4 +128,5 @@ export default function DashboardSidebar({ role = "owner" }) {
         </>
     )
 }
+
 
