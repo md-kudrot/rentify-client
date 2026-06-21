@@ -76,7 +76,7 @@ export default function Navbar() {
                                     alt="Alexander Hunt Profile"
                                     src={
                                         user?.image ||
-                                        `https://ui-avatars.com/api/?name=${user.name}&background=19120d&color=ffb77e`
+                                        `https://ui-avatars.com/api/?name=${user?.name}&background=19120d&color=ffb77e`
                                     }
                                 />
                             </div>

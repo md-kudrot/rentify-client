@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import Icon from "../Icon"
+import { ArrowLeft } from "@gravity-ui/icons"
 
 export default function DashboardSidebar({ role = "owner" }) {
     const pathname = usePathname()
@@ -26,7 +27,7 @@ export default function DashboardSidebar({ role = "owner" }) {
             { name: "Dashboard", href: "/dashboard/tenant", icon: "dashboard" },
             { name: "My Bookings", href: "/dashboard/tenant/my-bookings", icon: "home" },
             { name: "Favorites", href: "/dashboard/tenant/favorites", icon: "favorite" },
-            { name: "Profile", href: "/dashboard/tenant/profile", icon: "person" },
+            { name: "Profile", href: "/dashboard/tenant/profile", icon: "person" }
         ],
         admin: [
             { name: "Dashboard", href: "/dashboard/admin", icon: "dashboard" },
@@ -43,7 +44,7 @@ export default function DashboardSidebar({ role = "owner" }) {
         <div className="flex flex-col h-full bg-surface-container border-r border-outline-variant/10">
             <div className="p-lg h-16 flex items-center justify-between overflow-hidden whitespace-nowrap">
                 <Link href="/" className="font-display-lg text-headline-md tracking-tight text-primary">
-                    Rentora
+                    <ArrowLeft></ArrowLeft> Rentora
                 </Link>
             </div>
 
@@ -72,7 +73,7 @@ export default function DashboardSidebar({ role = "owner" }) {
                 })}
             </nav>
 
-            <div className="p-lg border-t border-outline-variant/10 bg-surface-container-low overflow-hidden whitespace-nowrap">
+            {/* <div className="p-lg border-t border-outline-variant/10 bg-surface-container-low overflow-hidden whitespace-nowrap">
                 <div className="flex items-center gap-md">
                     <div className="w-10 h-10 rounded-full border-2 border-primary/20 overflow-hidden flex-shrink-0">
                         <img
@@ -87,7 +88,7 @@ export default function DashboardSidebar({ role = "owner" }) {
                     </div>
                     <Icon name="verified" className="text-primary ml-auto" size={16} />
                 </div>
-            </div>
+            </div> */}
         </div>
     )
 
@@ -128,5 +129,4 @@ export default function DashboardSidebar({ role = "owner" }) {
         </>
     )
 }
-
 

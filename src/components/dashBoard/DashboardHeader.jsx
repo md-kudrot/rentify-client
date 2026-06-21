@@ -1,4 +1,8 @@
+'use client"'
+import Link from "next/link"
 import Icon from "../Icon"
+import Image from "next/image"
+import { authClient } from "@/lib/auth-client"
 
 export default function DashboardHeader({ role }) {
     const titles = {
@@ -6,6 +10,12 @@ export default function DashboardHeader({ role }) {
         tenant: "Tenant Dashboard",
         admin: "Admin Dashboard"
     }
+
+    const { data: session } = authClient.useSession()
+    // console.log(session);
+
+    const user = session?.user
+    console.log(user)
 
     return (
         <header className="h-16 sticky top-0 bg-surface/80 backdrop-blur-xl z-50 border-b border-outline-variant/10 px-lg flex items-center justify-between">
@@ -31,13 +41,21 @@ export default function DashboardHeader({ role }) {
                         <Icon name="notifications" size={24} />
                     </button>
                     <div className="w-10 h-10 rounded-full copper-gradient p-[2px]">
-                        <div className="w-full h-full rounded-full bg-surface-container overflow-hidden">
-                            <img
+                        <Link
+                            href="/dashboard/tenant/profile"
+                            className="w-full h-full rounded-full bg-surface-container overflow-hidden"
+                        >
+                            <Image
+                                height={40}
+                                width={40}
                                 className="w-full h-full object-cover"
-                                alt="User Avatar"
-                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuADGQ3gmdPStVwLldv7oCz6pQKsHjQPdQwv73Np7PmadDJtcQVWMFNfOmCMZRqlq3MMftmDVpYaV9WKUKWtkGlrZuXIK6obTn9Zn3Tfc1uUmA1x08BUtp8igmI1v1ThfKu_v_anVclVt2YkWsX9bhUfOMwpHZjhN1d2ZEfUrVSQhp4tznFuAhp9nZRn9TrT39bRAUaFwjJ91BaQyWqx-Ca5GeRZdjPI_LLq2BVYOeP3ZECsXM73XB2v82xWUh48BVSN1bAhNG18CVU"
+                                alt={user?.name || "User Avatar"}
+                                src={
+                                    user?.image ||
+                                    `https://ui-avatars.com/api/?name=${user?.name}&background=19120d&color=ffb77e`
+                                }
                             />
-                        </div>
+                        </Link>
                     </div>
                 </div>
             </div>

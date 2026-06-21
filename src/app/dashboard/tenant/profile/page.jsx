@@ -76,13 +76,13 @@ export default function ProfilePage() {
                                     <label className="text-xs text-[#d9c2b3] uppercase tracking-wider font-bold mb-1 block">
                                         Full Name
                                     </label>
-                                    <p className="text-lg text-[#efe0d7] font-medium">{user?.name}</p>
+                                    <p className="text-lg text-[#efe0d7] font-medium">{user?.name || "N/A"}</p>
                                 </div>
                                 <div>
                                     <label className="text-xs text-[#d9c2b3] uppercase tracking-wider font-bold mb-1 block">
                                         Email Address
                                     </label>
-                                    <p className="text-lg text-[#efe0d7] font-medium">{user?.email}</p>
+                                    <p className="text-lg text-[#efe0d7] font-medium">{user?.email || "N/A"}</p>
                                 </div>
                                 <div>
                                     <label className="text-xs text-[#d9c2b3] uppercase tracking-wider font-bold mb-1 block">
@@ -97,12 +97,13 @@ export default function ProfilePage() {
                                         Created At
                                     </label>
                                     <p className="text-lg text-[#efe0d7] font-medium">
-                                        {user?.createdAt &&
+                                        {(user?.createdAt &&
                                             new Date(user.createdAt).toLocaleDateString("en-US", {
                                                 year: "numeric",
                                                 month: "long",
                                                 day: "numeric"
-                                            })}
+                                            })) ||
+                                            "N/A"}
                                     </p>
                                 </div>
                             </div>
