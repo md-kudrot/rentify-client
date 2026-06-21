@@ -1,9 +1,9 @@
 import React from "react"
-import Icon from '../Icon';
+import Icon from "../Icon"
 
 export default function AmenitiesSection({ property }) {
     const amenities = property?.premiumAmenities || [
-        "Infinity Pool" ,
+        "Infinity Pool",
         "Private Cinema",
         "Gourmet Kitchen",
         "Smart Home System",
@@ -20,9 +20,9 @@ export default function AmenitiesSection({ property }) {
                         key={idx}
                         className="flex items-center gap-4 p-4 bg-[#211a15] border border-[#534438]/10 rounded-xl"
                     >
-                        {/* <div className="w-10 h-10 rounded-full bg-[#ffb77e]/10 flex items-center justify-center text-[#ffb77e]">
+                        <div className="w-10 h-10 rounded-full bg-[#ffb77e]/10 flex items-center justify-center text-[#ffb77e]">
                             <Icon name={item.icon} size={20} />
-                        </div> */}
+                        </div>
                         <span className="text-[16px] text-white">{item}</span>
                     </div>
                 ))}
@@ -30,5 +30,4 @@ export default function AmenitiesSection({ property }) {
         </section>
     )
 }
-
 
