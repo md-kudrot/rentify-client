@@ -1,6 +1,8 @@
 import { stripe } from "@/lib/stripe"
 import { redirect } from "next/navigation"
 import Link from "next/link"
+import { auth } from "@/lib/auth"
+import { headers } from "next/headers"
 
 export default async function PaymentSuccess({ searchParams }) {
     const { session_id } = await searchParams
@@ -15,11 +17,13 @@ export default async function PaymentSuccess({ searchParams }) {
 
     if (session.status === "complete") {
         const { metadata, customer_details } = session
-
-        // ✅ Express server এ booking save করছি
+        const { token } = await auth.api.getToken({
+            headers: await headers()
+        })
+        // Express server booking save
         await fetch(`${process.env.SERVER_URL}/api/bookings`, {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: { "Content-Type": "application/json", authorization: `Bearer ${token}` },
             body: JSON.stringify({
                 sessionId: session_id,
                 userId: metadata.userId,

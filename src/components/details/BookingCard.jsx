@@ -89,7 +89,7 @@ export default function BookingCard({ property }) {
 
                     <button
                         type="submit"
-                        className="w-full py-3 bg-[#ffb77e] text-[#0B1120] font-bold rounded-lg hover:bg-[#ffb77e]/90 transition-colors"
+                        className="w-full cursor-pointer py-3 bg-[#ffb77e] text-[#0B1120] font-bold rounded-lg hover:bg-[#ffb77e]/90 transition-colors"
                     >
                         Book Now
                     </button>

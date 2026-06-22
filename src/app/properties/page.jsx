@@ -7,83 +7,8 @@ import Link from "next/link"
 import { Button } from "@heroui/react"
 import { ArrowLeft } from "@gravity-ui/icons"
 import Icon from "@/components/Icon"
-import { auth } from "@/lib/auth"
 import { headers } from "next/headers"
-
-// const properties = [
-//     {
-//         id: 1,
-//         title: "Celestial Heights Villa",
-//         price: "$4,250,000",
-//         location: "Palm Jumeirah, Dubai",
-//         beds: 5,
-//         baths: 6,
-//         sqft: "8,400",
-//         imageSrc:
-//             "https://lh3.googleusercontent.com/aida-public/AB6AXuDbkn9-GpDB0Rcvyh-qH6I3p2XXsPzP8eWJAt5IdpBR1005a-EMuIMlBXe01qcxzA9C5s_4gTERfEDdhVJenh5vGhjgI3BdWGs7ssREn4X7GQaEyLKWDuCN1JzaVycnOQLJ1Iu2zSrQkzT1_XF5nzqM3ByQ4LUOy-4FhBmAQzxRknLi7oOjwb-_ch-kN-oXIKvBoEtBXet7HUEzyyrpgDZKYBHKpMrzNluGCuoP81JCkfCYGJxuvGWDmul7uzVeBwfzR0CRm3hnu5E",
-//         badge: "FEATURED"
-//     },
-//     {
-//         id: 2,
-//         title: "The Copper Horizon",
-//         price: "$2,800,000",
-//         location: "Downtown Miami, FL",
-//         beds: 3,
-//         baths: 3.5,
-//         sqft: "3,200",
-//         imageSrc:
-//             "https://lh3.googleusercontent.com/aida-public/AB6AXuA2MSu2UE7FTNvDSkPqh7mEEsSzYaWu7aQKo0J4SfSVXttdExqqhm-5YO8axGOjW271fO-uQ581fs6w7kGDbUVoxxvZADucpwWMSmoLXdMnJKt0nFc5p8PVMKoNm1t4QWsWveDczVePpQW6VhLGq2DEW431-UMSs1yvxyuoH8qyiJTDEhVuXqmFcSSOsgtkHfyqB-pMrQep9X-QE5BwC75vdykyrieEJBNL02Zl6dEnLEalDPwOIjmV0uJZXn8qO9ZTbyhSZ8LAQjY",
-//         badge: "Rare Find"
-//     },
-//     {
-//         id: 3,
-//         title: "Obsidian Retreat",
-//         price: "$1,950,000",
-//         location: "Aspen, Colorado",
-//         beds: 4,
-//         baths: 4,
-//         sqft: "5,100",
-//         imageSrc:
-//             "https://lh3.googleusercontent.com/aida-public/AB6AXuDoXs-aPmcHker3Hw93J_dyah6dOkHLrFHM0_MuerxVAhcY2Xa7TEKc2FazSSM5MTnPWpyRbT-oKtG24oh1M19aCsnMV2QMR_EqCSdxSBdzaZK2l2MnzZkdplVMMiFoVvCgYNUi6p-_Wf0R5tEfASQbCFUw3MaZzHi2HPYvyviTY_APiSnf94vuv9fu3ad56SMUdQUfBdv7JGteK4oDM_VAYfDv8z-GwZRsZVxAjU3ijmdg__ffYdrXzIK4HlLlg9p6PD_c7tr0nEk",
-//         badge: null
-//     },
-//     {
-//         id: 4,
-//         title: "Azure Cove Mansion",
-//         price: "$8,900,000",
-//         location: "Monaco Coastline",
-//         beds: 7,
-//         baths: 9,
-//         sqft: "12,000",
-//         imageSrc:
-//             "https://lh3.googleusercontent.com/aida-public/AB6AXuAbhzf0UwmlJTdOGkdlDJM__JiqiXZKoKNnKI4iQ0BtI3dyBy_s8QUExvWfMuLoBHIVf3NIVLrSoc65EKPsbRK6lJCZbUdkThRH6t8zw5ZXFxjMSPhysGJuafHAlPWK-V5ysj2DzK-6WoAAhRf9DEe8i87W8dwhm_-eV-5j7fD1siBk6B8U_lTHJZpInZ0sMxCVDTxNrd8wPu7c2LRmjGCDWBIH6XjnpkrAxbgd6AaRrJziyCAlwuQjli0IFG_EpK6Ah_qfL8QXqzw",
-//         badge: null
-//     },
-//     {
-//         id: 5,
-//         title: "Mayfair Loft Suite",
-//         price: "$3,400,000",
-//         location: "London, UK",
-//         beds: 2,
-//         baths: 2.5,
-//         sqft: "2,100",
-//         imageSrc:
-//             "https://lh3.googleusercontent.com/aida-public/AB6AXuBkpHXhdYCbaqNDPJqKlZJSRj_NQGQEgm9Ht0l14vokoQIkxQcx6e7iePuBI6xi2dRaO4ur4GfhPhePLRY3ZNv-jCaTeef5wGD91idy_J3YU50rYrjyPfPLfWRaIuyAIDCRezSuHm52cWtXjp5gaduPspLcvGKXIfGxglrAKcJVHppZK92ukjCLZIVByRZ1BniFKiBkRa7CtMLI8nwAHpPG-HjK6LSwKQMi0R9hqgiCtwPCfX2I-sfj1FDM4LmUiPOeXEvewopiRbg",
-//         badge: null
-//     },
-//     {
-//         id: 6,
-//         title: "Saffron Ridge Estate",
-//         price: "$5,600,000",
-//         location: "Scottsdale, AZ",
-//         beds: 6,
-//         baths: 7,
-//         sqft: "9,800",
-//         imageSrc:
-//             "https://lh3.googleusercontent.com/aida-public/AB6AXuA83VVVzzUrlEhSSxzds81wLdwltaFGEEBIgvvXjaeizXHLRdjmZfh0M5Gpq61lfRoVhhbByJtMN6mm1Wzjs0fFotinejIo3pvB-jn9_s4iWNK3arDmvfzgXs9HbnTXRQADUU7EO3R3OwbBv9hcftPAVSTNLaccDbdCyYjU0yjPf7mxXBFD7rwy_qRDIN6Mq8779BaIcnGsy4ZmvQd14f5d7JixPJkTeqRDcErJaVQL1aNDgyoJ2PhW1B_S0XzXCdK3A23t3tufPPE",
-//         badge: null
-//     }
-// ]
+import { auth } from "@/lib/auth"
 
 export default async function PropertiesPage() {
     const { token } = await auth.api.getToken({
