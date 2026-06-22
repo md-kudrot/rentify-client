@@ -20,6 +20,8 @@ export default function BookingCard({ property }) {
     const user = session?.user
     const userRole = user?.role
 
+    console.log(property?.ownerEmail)
+
     return (
         <div className="sticky top-24 glass-panel bg-gradient-to-b from-[#0B1120] to-[#1a202c] p-10 rounded-[24px] shadow-2xl space-y-6">
             <div className="flex justify-between items-baseline">
@@ -76,7 +78,6 @@ export default function BookingCard({ property }) {
                 </div>
             </div>
 
-            {/* ✅ form এ hidden input দিয়ে data পাঠাচ্ছি */}
             {userRole === "tenant" ? (
                 <form action="/api/subscription" method="POST">
                     <input type="hidden" name="price" value={property?.price * nights} />
@@ -84,6 +85,7 @@ export default function BookingCard({ property }) {
                     <input type="hidden" name="title" value={property?.title} />
                     <input type="hidden" name="productId" value={property?._id} />
                     <input type="hidden" name="role" value={"tenant"} />
+                    <input type="hidden" name="ownerEmail" value={property?.ownerEmail || "kk@gmail.com"} />
 
                     <button
                         type="submit"

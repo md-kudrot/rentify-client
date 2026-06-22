@@ -29,7 +29,8 @@ export default async function PaymentSuccess({ searchParams }) {
                 nights: Number(metadata.nights),
                 totalPrice: Number(metadata.totalPrice),
                 status: "pending",
-                bookedAt: new Date().toISOString()
+                bookedAt: new Date().toISOString(),
+                ownerEmail: metadata.ownerEmail
             })
         })
 

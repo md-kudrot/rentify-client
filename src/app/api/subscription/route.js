@@ -23,6 +23,7 @@ export async function POST(request) {
         const title = formData.get("title")
         const productId = formData.get("productId")
         const role = formData.get("role")
+        const ownerEmail = formData.get("ownerEmail")
 
         const session = await stripe.checkout.sessions.create({
             customer_email: user.email,
@@ -45,7 +46,8 @@ export async function POST(request) {
                 productId,
                 nights,
                 totalPrice: price,
-                role
+                role,
+                ownerEmail
             },
             mode: "payment",
             success_url: `${origin}/properties/success?session_id={CHECKOUT_SESSION_ID}`,

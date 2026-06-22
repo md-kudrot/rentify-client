@@ -43,7 +43,7 @@ export default function SignUpPage() {
     }
 
     return (
-        <div className="min-h-screen flex items-center justify-center  bg-[#0B1120] p-4 relative overflow-hidden">
+        <div className="min-h-screen flex items-center justify-center mt-20 mt-0 bg-[#0B1120] p-4 relative overflow-hidden">
             {/* Background ambient decorations */}
             <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0 pointer-events-none">
                 <div className="absolute top-[-10%] right-[-10%] w-[40%] h-[40%] bg-[#C97B36]/10 blur-[100px] rounded-full mix-blend-screen" />
@@ -54,7 +54,7 @@ export default function SignUpPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
-                className="w-[30%]  z-10 "
+                className="lg:w-[25%]  z-10 "
             >
                 <div className="glass-panel  rounded-[32px] p-8 w-full flex flex-col gap-6">
                     <div className="text-center">
