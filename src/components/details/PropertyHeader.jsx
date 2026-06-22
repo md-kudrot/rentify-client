@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react"
 import Icon from "../Icon"
+import { authClient } from "@/lib/auth-client"
 
 export default function PropertyHeader({ property }) {
     const [isFavorited, setIsFavorited] = useState(property?.isFavorite || false)
@@ -20,10 +21,22 @@ export default function PropertyHeader({ property }) {
             setIsLoading(true)
             const newState = !isFavorited
 
+            // Get auth token before making the request
+            const { data: tokenData } = await authClient.token()
+
+            if (!tokenData?.token) {
+                console.error("No auth token found — user not logged in")
+                alert("Please log in to save favorites")
+                return
+            }
+
             // Call PATCH endpoint to update isFavorite in database
             const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/properties/${property._id}/favorite`, {
                 method: "PATCH",
-                headers: { "Content-Type": "application/json" },
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${tokenData.token}`
+                },
                 body: JSON.stringify({ isFavorite: newState })
             })
 
