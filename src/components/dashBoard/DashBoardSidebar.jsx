@@ -20,7 +20,7 @@ export default function DashboardSidebar({ role = "owner" }) {
             { name: "Dashboard", href: "/dashboard/owner", icon: "dashboard" },
             { name: "Add Property", href: "/dashboard/owner/add-property", icon: "add" },
             { name: "Booking Requests", href: "/dashboard/owner/booking-requests", icon: "analytics" },
-            { name: "Overview", href: "/dashboard/owner/overview", icon: "overview" },
+            { name: "My Properties", href: "/dashboard/owner/my-properties", icon: "home" },
             { name: "Profile", href: "/dashboard/owner/profile", icon: "person" }
         ],
         tenant: [
