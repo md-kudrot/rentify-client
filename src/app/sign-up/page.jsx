@@ -24,7 +24,7 @@ export default function SignUpPage() {
             email: user.email,
             password: user.password,
             image: user.image,
-            role: "Tenant"
+            role: "tenant"
         })
         if (data) {
             console.log("signup success ")
@@ -97,10 +97,13 @@ export default function SignUpPage() {
                             <label className="text-sm font-medium text-[#efe0d7]">Image URL</label>
                             <div className="relative">
                                 <input
-                                    placeholder="Enter your image url"
+                                    className="form-input flex w-full rounded-xl text-[#b0f0d6] border border-[#4edea3]/20 bg-[#003123]/25 focus:ring-2 focus:ring-[#4edea3]/50 focus:border-[#4edea3] h-12 placeholder:text-[#bbcabf]/30 pl-10 pr-4 text-sm transition-all font-['JetBrains_Mono',monospace] invalid:border-red-500/60 invalid:focus:ring-red-500/30 invalid:focus:border-red-500"
+                                    placeholder="https://example.com/image.jpg"
+                                    required
                                     type="url"
                                     name="image"
-                                    className="w-full bg-[#19120d] border border-[#534438]/30 rounded-xl h-12 pl-10 pr-4 text-[#efe0d7] focus:border-[#ffb77e] outline-none placeholder:text-[#534438]/60 transition-colors"
+                                    pattern="https://[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,}(/[^\s]*)?"
+                                    title="Please enter a valid image URL (jpg, jpeg, png, gif, webp, svg, avif)"
                                 />
                                 <div className="absolute left-3 top-1/2 -translate-y-1/2 z-10">
                                     <LinkIcon className="text-[#ffb77e]" width={20} height={20} />
