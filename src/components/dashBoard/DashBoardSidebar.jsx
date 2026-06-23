@@ -18,10 +18,10 @@ export default function DashboardSidebar({ role = "owner" }) {
     const navLinks = {
         owner: [
             { name: "Dashboard", href: "/dashboard/owner", icon: "dashboard" },
-            { name: "Properties", href: "/dashboard/owner/properties", icon: "real_estate_agent" },
-            { name: "Analytics", href: "/dashboard/owner/analytics", icon: "analytics" },
-            { name: "Messages", href: "/dashboard/owner/messages", icon: "mail", badge: 12 },
-            { name: "Settings", href: "/dashboard/owner/settings", icon: "settings" }
+            { name: "Add Property", href: "/dashboard/owner/add-property", icon: "add" },
+            { name: "Booking Requests", href: "/dashboard/owner/booking-requests", icon: "analytics" },
+            { name: "Overview", href: "/dashboard/owner/overview", icon: "overview" },
+            { name: "Profile", href: "/dashboard/owner/profile", icon: "person" }
         ],
         tenant: [
             { name: "Dashboard", href: "/dashboard/tenant", icon: "dashboard" },
