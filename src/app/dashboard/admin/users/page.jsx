@@ -24,19 +24,33 @@ export default function AdminUsersPage() {
     const [roleUpdateLoading, setRoleUpdateLoading] = useState(false)
     const [roleUpdateError, setRoleUpdateError] = useState("")
 
+    // ── Pagination State ─────────────────────────────────
+    const [currentPage, setCurrentPage] = useState(1)
+    const [totalPages, setTotalPages] = useState(0)
+    const [totalUsers, setTotalUsers] = useState(0)
+
     // ── Fetch Users ──────────────────────────────────────────
-    const fetchUsers = async () => {
+    const fetchUsers = async (page = 1) => {
         if (!token) return
         setLoading(true)
         setError("")
         try {
             const { data: tokenData } = await authClient.token()
-            const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/users`, {
+
+            // URL-এ page parameter যোগ করো
+            const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/users?page=${page}`, {
                 headers: { Authorization: `Bearer ${tokenData?.token}` }
             })
+
             if (!res.ok) throw new Error("Failed to fetch users")
+
             const data = await res.json()
-            setUsers(data)
+
+            // Data এবং pagination info set করো
+            setUsers(data.users)
+            setCurrentPage(data.pagination.currentPage)
+            setTotalPages(data.pagination.totalPages)
+            setTotalUsers(data.pagination.totalUsers)
         } catch (err) {
             setError(err.message)
         } finally {
@@ -45,8 +59,8 @@ export default function AdminUsersPage() {
     }
 
     useEffect(() => {
-        fetchUsers()
-    }, [token])
+        fetchUsers(currentPage) // Current page pass করো
+    }, [token, currentPage]) // currentPage পরিবর্তনে re-fetch করবে
 
     // ── Filter Logic ─────────────────────────────────────────
     const filteredUsers = users.filter((u) => {
@@ -273,6 +287,45 @@ export default function AdminUsersPage() {
                                 </button>
                             </div>
                         </div>
+                    </div>
+                </div>
+            )}
+
+            {/* ── Pagination Controls ── */}
+            {!loading && filteredUsers.length > 0 && (
+                <div className="p-6 border-t border-[#534438]/20 flex items-center justify-between bg-[#211a15]/50">
+                    {/* Left: Info */}
+                    <div className="text-sm text-[#d9c2b3]">
+                        Showing <span className="font-bold text-[#ffb77e]">{(currentPage - 1) * 10 + 1}</span> to{" "}
+                        <span className="font-bold text-[#ffb77e]">{Math.min(currentPage * 10, totalUsers)}</span> of{" "}
+                        <span className="font-bold text-[#ffb77e]">{totalUsers}</span> users
+                    </div>
+
+                    {/* Right: Buttons */}
+                    <div className="flex items-center gap-3">
+                        {/* Previous Button */}
+                        <button
+                            onClick={() => setCurrentPage((prev) => prev - 1)}
+                            disabled={currentPage === 1 || loading}
+                            className="px-4 py-2 bg-[#302823] text-[#d9c2b3] rounded-lg font-bold text-sm disabled:opacity-50 disabled:cursor-not-allowed hover:bg-[#534438]/50 transition-colors"
+                        >
+                            ← Previous
+                        </button>
+
+                        {/* Page Info */}
+                        <div className="px-4 py-2 bg-[#302823] text-[#efe0d7] rounded-lg text-sm font-bold">
+                            Page <span className="text-[#ffb77e]">{currentPage}</span> of{" "}
+                            <span className="text-[#ffb77e]">{totalPages}</span>
+                        </div>
+
+                        {/* Next Button */}
+                        <button
+                            onClick={() => setCurrentPage((prev) => prev + 1)}
+                            disabled={currentPage === totalPages || loading}
+                            className="px-4 py-2 bg-[#302823] text-[#d9c2b3] rounded-lg font-bold text-sm disabled:opacity-50 disabled:cursor-not-allowed hover:bg-[#534438]/50 transition-colors"
+                        >
+                            Next →
+                        </button>
                     </div>
                 </div>
             )}
