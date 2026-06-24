@@ -41,6 +41,10 @@ export default function AdminPropertiesPage() {
     // ── Approve loading ───────────────────────────────────
     const [approveLoadingId, setApproveLoadingId] = useState(null)
 
+    const [currentPage, setCurrentPage] = useState(1)
+    const [totalPages, setTotalPages] = useState(1)
+    const [totalProperties, setTotalProperties] = useState(0)
+
     // ── Fetch ─────────────────────────────────────────────
     const fetchProperties = async () => {
         if (!token) return
@@ -48,12 +52,14 @@ export default function AdminPropertiesPage() {
         setError("")
         try {
             const { data: tokenData } = await authClient.token()
-            const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/properties`, {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/properties?page=${currentPage}`, {
                 headers: { Authorization: `Bearer ${tokenData.token}` }
             })
             if (!res.ok) throw new Error("Failed to fetch properties")
             const data = await res.json()
-            setProperties(data)
+            setProperties(data.properties)
+            setTotalProperties(data.pagination.totalProperties)
+            setTotalPages(data.pagination.totalPages)
         } catch (err) {
             setError(err.message)
         } finally {
@@ -63,7 +69,7 @@ export default function AdminPropertiesPage() {
 
     useEffect(() => {
         fetchProperties()
-    }, [token])
+    }, [token, currentPage])
 
     // ── Filter Logic ──────────────────────────────────────
     const filteredProperties = properties.filter((p) => {
@@ -74,6 +80,13 @@ export default function AdminPropertiesPage() {
         const matchStatus = statusFilter ? p.status === statusFilter : true
         return matchSearch && matchStatus
     })
+
+    const getPageNumbers = (current, total) => {
+        if (total <= 7) return Array.from({ length: total }, (_, i) => i + 1)
+        if (current <= 4) return [1, 2, 3, 4, 5, "...", total]
+        if (current >= total - 3) return [1, "...", total - 4, total - 3, total - 2, total - 1, total]
+        return [1, "...", current - 1, current, current + 1, "...", total]
+    }
 
     // ── Approve ───────────────────────────────────────────
     const handleApprove = async (id) => {
@@ -577,6 +590,60 @@ export default function AdminPropertiesPage() {
                                 {editLoading ? "Saving..." : "Save Changes"}
                             </button>
                         </div>
+                    </div>
+                </div>
+            )}
+
+            {/* Pagination */}
+            {!loading && !error && totalPages > 1 && (
+                <div className="flex items-center justify-between px-6 py-4 border-t border-[#534438]/20 bg-[#211a15]/50 flex-wrap gap-3">
+                    <span className="text-xs text-[#d9c2b3]">
+                        Showing {(currentPage - 1) * 10 + 1}–{Math.min(currentPage * 10, totalProperties)} of{" "}
+                        {totalProperties} properties
+                    </span>
+
+                    <div className="flex items-center gap-1.5">
+                        {/* Prev */}
+                        <button
+                            onClick={() => setCurrentPage((p) => p - 1)}
+                            disabled={currentPage === 1}
+                            className="flex items-center gap-1 px-3 h-8 rounded-lg border border-[#534438]/50 text-xs text-[#d9c2b3] hover:bg-[#302823] disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                        >
+                            ← Prev
+                        </button>
+
+                        {/* Page numbers */}
+                        {getPageNumbers(currentPage, totalPages).map((p, i) =>
+                            p === "..." ? (
+                                <span
+                                    key={`dot-${i}`}
+                                    className="w-8 h-8 flex items-center justify-center text-xs text-[#534438]"
+                                >
+                                    …
+                                </span>
+                            ) : (
+                                <button
+                                    key={p}
+                                    onClick={() => setCurrentPage(p)}
+                                    className={`w-8 h-8 rounded-lg text-xs font-bold transition-colors border ${
+                                        currentPage === p
+                                            ? "bg-gradient-to-br from-[#C97B36] to-[#F4A261] text-white border-transparent"
+                                            : "border-[#534438]/50 text-[#d9c2b3] hover:bg-[#302823]"
+                                    }`}
+                                >
+                                    {p}
+                                </button>
+                            )
+                        )}
+
+                        {/* Next */}
+                        <button
+                            onClick={() => setCurrentPage((p) => p + 1)}
+                            disabled={currentPage === totalPages}
+                            className="flex items-center gap-1 px-3 h-8 rounded-lg border border-[#534438]/50 text-xs text-[#d9c2b3] hover:bg-[#302823] disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                        >
+                            Next →
+                        </button>
                     </div>
                 </div>
             )}

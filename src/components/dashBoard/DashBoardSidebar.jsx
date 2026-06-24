@@ -34,7 +34,8 @@ export default function DashboardSidebar({ role = "owner" }) {
             { name: "Booking Management", href: "/dashboard/admin/bookings", icon: "calendar_today" },
             { name: "Properties", href: "/dashboard/admin/properties", icon: "real_estate_agent" },
             { name: "Transactions", href: "/dashboard/admin/transactions", icon: "favorite" },
-            { name: "Users", href: "/dashboard/admin/users", icon: "group" }
+            { name: "Users", href: "/dashboard/admin/users", icon: "group" },
+            { name: "Profile", href: "/dashboard/owner/profile", icon: "person" }
         ]
     }
 

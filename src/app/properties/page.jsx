@@ -1,234 +1,148 @@
-import React from "react"
-// import Navbar from "@/components/Navbar"
-import Footer from "@/components/Footer"
-// import BottomNavBar from '@/components/BottomNavBar';
+import React, { Suspense } from "react"
 import PropertyCard from "@/components/PropertyCard"
 import Link from "next/link"
-import { Button } from "@heroui/react"
-import { ArrowLeft } from "@gravity-ui/icons"
 import Icon from "@/components/Icon"
 import { headers } from "next/headers"
 import { auth } from "@/lib/auth"
+import FilterControls from "@/components/filter/FilterControls"
 
-export default async function PropertiesPage() {
-    const { token } = await auth.api.getToken({
-        headers: await headers()
-    })
-    // console.log("Token in details page from Ideas:", token)
+export default async function PropertiesPage({ searchParams }) {
+    const params = await searchParams
+    const currentPage = parseInt(params?.page) || 1
+    const location = params?.location || ""
+    const type = params?.type || ""
+    const sort = params?.sort || ""
+
+    // Build query string for backend
+    const query = new URLSearchParams()
+    query.set("page", currentPage)
+    if (location) query.set("location", location)
+    if (type) query.set("type", type)
+    if (sort) query.set("sort", sort)
 
     let allProperties = []
+    let totalPages = 1
+    let total = 0
+
     try {
-        // const res = await fetch(`${process.env.Server_URL}/api/properties`)
-        const res = await fetch(`${process.env.Server_URL}/api/properties`, {
-            cache: "no-store",
-            headers: {
-                authorization: `Bearer ${token}`
-            }
+        const res = await fetch(`${process.env.Server_URL}/api/properties/public?${query.toString()}`, {
+            cache: "no-store"
         })
-        allProperties = await res.json()
-        console.log(allProperties)
+        const data = await res.json()
+        allProperties = data.properties
+        totalPages = data.pagination.totalPages
+        total = data.pagination.total
     } catch (error) {
         console.error("Error fetching properties:", error)
         return (
-            <div className="h-screen flex items-center justify-center bg-[#0B1120]  relative overflow-hidden">
-                <div className="absolute top-0 left-0 w-full h-screen overflow-hidden z-0 pointer-events-none">
-                    <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-[#C97B36]/10 blur-[100px] rounded-full mix-blend-screen" />
-                    <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-[#139fb3]/10 blur-[100px] rounded-full mix-blend-screen" />
-                </div>
-                <h1 className="text-white text-[24px] font-semibold z-10">
+            <div className="h-screen flex items-center justify-center bg-[#0B1120]">
+                <h1 className="text-white text-[24px] font-semibold">
                     Failed to load properties. Please try again later.
                 </h1>
             </div>
         )
     }
 
+    function getPageNumbers(current, total) {
+        if (total <= 7) return Array.from({ length: total }, (_, i) => i + 1)
+        if (current <= 4) return [1, 2, 3, 4, 5, "...", total]
+        if (current >= total - 3) return [1, "...", total - 4, total - 3, total - 2, total - 1, total]
+        return [1, "...", current - 1, current, current + 1, "...", total]
+    }
+
+    // Preserve filters in pagination links
+    function buildPageUrl(page) {
+        const p = new URLSearchParams()
+        p.set("page", page)
+        if (location) p.set("location", location)
+        if (type) p.set("type", type)
+        if (sort) p.set("sort", sort)
+        return `/properties?${p.toString()}`
+    }
+
     return (
-        <>
-            <div className="bg-[#0B1120] text-white min-h-screen text-[16px] md:pt-0 pt-20 overflow-x-hidden">
-                {/* <Navbar /> */}
+        <div className="bg-[#0B1120] text-white min-h-screen text-[16px] md:pt-0 pt-20 overflow-x-hidden">
+            <main className="pt-24 pb-20 px-6 max-w-[1280px] mx-auto  flex  lg:flex-row gap-6">
+                {/* FilterControls — Sidebar + Sort Dropdown একসাথে */}
+                <Suspense fallback={<div className="w-72" />}>
+                    <FilterControls />
+                </Suspense>
 
-                <main className="pt-24 pb-20 px-6 max-w-[1280px] mx-auto flex flex-col lg:flex-row gap-6">
-                    {/* Sidebar Filters (Desktop) */}
-                    <aside className="hidden lg:block w-72 shrink-0">
-                        <div className="sticky top-24 space-y-6">
-                            <div className="flex flex-col  gap-2 text-[#ffb77e] mb-4">
-                                {/* back */}
-                                <Button
-                                    className="text-[#ffb77e] hover:underline bg-transparent border-none px-0"
-                                    variant="text"
-                                >
-                                    <Link href="/" className="text-[#ffb77e] flex items-center gap-2 hover:underline">
-                                        <ArrowLeft></ArrowLeft> Back
-                                    </Link>
-                                </Button>
-
-                                <Icon name="tune" size={24} className="text-[#ffb77e]" />
-                                <h2 className="font-bold text-[24px]">Filters</h2>
-                            </div>
-
-                            {/* Location */}
-                            <div className="space-y-2">
-                                <label className="font-semibold text-[#d9c2b3] uppercase tracking-widest text-[10px]">
-                                    Location
-                                </label>
-                                <div className="relative">
-                                    <input
-                                        className="w-full bg-[#130d08] border border-[#534438]/20 rounded-xl px-4 py-2 focus:border-[#ffb77e] outline-none text-[16px] transition-all text-white placeholder:text-[#d9c2b3]/50"
-                                        placeholder="Dubai, UAE"
-                                        type="text"
-                                    />
-                                    <Icon
-                                        name="location_on"
-                                        size={20}
-                                        className="absolute right-3 top-1/2 -translate-y-1/2 text-[#d9c2b3]/50"
-                                    />
-                                </div>
-                            </div>
-
-                            {/* Property Type */}
-                            <div className="space-y-2">
-                                <label className="font-semibold text-[#d9c2b3] uppercase tracking-widest text-[10px]">
-                                    Property Type
-                                </label>
-                                <div className="flex flex-wrap gap-1">
-                                    <button className="px-4 py-1 rounded-full bg-[#cd7e39] text-white font-semibold text-[14px]">
-                                        All
-                                    </button>
-                                    <button className="px-4 py-1 rounded-full bg-[#19120d] border border-[#534438]/20 text-[#d9c2b3] font-semibold text-[14px] hover:border-[#ffb77e]/40 transition-all">
-                                        Villa
-                                    </button>
-                                    <button className="px-4 py-1 rounded-full bg-[#19120d] border border-[#534438]/20 text-[#d9c2b3] font-semibold text-[14px] hover:border-[#ffb77e]/40 transition-all">
-                                        Penthouse
-                                    </button>
-                                    <button className="px-4 py-1 rounded-full bg-[#19120d] border border-[#534438]/20 text-[#d9c2b3] font-semibold text-[14px] hover:border-[#ffb77e]/40 transition-all">
-                                        Mansion
-                                    </button>
-                                </div>
-                            </div>
-
-                            {/* Price Range */}
-                            <div className="space-y-2">
-                                <div className="flex justify-between items-center">
-                                    <label className="font-semibold text-[#d9c2b3] uppercase tracking-widest text-[10px]">
-                                        Price Range
-                                    </label>
-                                    <span className="text-[#ffb77e] font-semibold text-[14px]">$1.2M - $5M+</span>
-                                </div>
-                                <input
-                                    className="w-full h-1.5 bg-[#19120d] rounded-full appearance-none cursor-pointer accent-[#ffb77e]"
-                                    type="range"
-                                />
-                                <div className="flex justify-between text-[10px] text-[#d9c2b3]/60">
-                                    <span>$500k</span>
-                                    <span>$10M</span>
-                                </div>
-                            </div>
-
-                            {/* Amenities */}
-                            <div className="space-y-2 pt-4 border-t border-[#534438]/10">
-                                <label className="font-semibold text-[#d9c2b3] uppercase tracking-widest text-[10px]">
-                                    Amenities
-                                </label>
-                                <div className="space-y-1">
-                                    <label className="flex items-center gap-2 cursor-pointer group">
-                                        <div className="w-5 h-5 rounded border border-[#534438]/30 flex items-center justify-center group-hover:border-[#ffb77e] transition-all"></div>
-                                        <span className="text-[16px] text-[#d9c2b3]">Private Infinity Pool</span>
-                                    </label>
-                                    <label className="flex items-center gap-2 cursor-pointer group">
-                                        <div className="w-5 h-5 rounded border border-[#534438]/30 flex items-center justify-center group-hover:border-[#ffb77e] transition-all">
-                                            <Icon name="check" size={14} className="text-[#ffb77e]" />
-                                        </div>
-                                        <span className="text-[16px] text-white">Home Theater</span>
-                                    </label>
-                                    <label className="flex items-center gap-2 cursor-pointer group">
-                                        <div className="w-5 h-5 rounded border border-[#534438]/30 flex items-center justify-center group-hover:border-[#ffb77e] transition-all"></div>
-                                        <span className="text-[16px] text-[#d9c2b3]">Smart Home Integration</span>
-                                    </label>
-                                </div>
-                            </div>
-
-                            <button className="w-full py-4 bg-gray-700 cursor-pointer copper-gradient text-white font-bold rounded-xl shadow-lg hover:scale-[1.02] active:scale-95 transition-all mt-10">
-                                Apply Search
-                            </button>
-                        </div>
-                    </aside>
-
-                    {/* Main Content */}
-                    <div className="flex-1 space-y-6">
-                        {/* Mobile Filters Toggle & Sorting */}
-                        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-                            <div>
-                                <h2 className="font-bold text-[32px] text-[#ffb77e]">Luxury Estates</h2>
-                                <p className="text-[#d9c2b3] text-[16px]">
-                                    248 exclusive properties matching your criteria
-                                </p>
-                            </div>
-                            <div className="flex items-center gap-2 w-full md:w-auto">
-                                <button className="lg:hidden flex-1 flex items-center justify-center gap-2 bg-[#211a15] border border-[#534438]/30 px-4 py-2 rounded-xl text-white">
-                                    <Icon name="tune" size={20} />
-                                    <span>Filters</span>
-                                </button>
-                                <div className="relative flex-1 md:w-48">
-                                    <select className="w-full bg-[#211a15] border border-[#534438]/30 px-4 py-2 rounded-xl text-white appearance-none focus:border-[#ffb77e] outline-none">
-                                        <option>Sort by: Newest</option>
-                                        <option>Price: Low to High</option>
-                                        <option>Price: High to Low</option>
-                                        <option>Most Popular</option>
-                                    </select>
-                                    <Icon
-                                        name="expand_more"
-                                        size={20}
-                                        className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-[#d9c2b3]"
-                                    />
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Grid of Cards */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-                            {allProperties.map((prop) => (
-                                <PropertyCard key={prop._id} {...prop} />
-                            ))}
-
-                            {allProperties.length === 0 && (
-                                <p className="text-center mt-20 text-[#d9c2b3] col-span-full">
-                                    No properties found matching your criteria. Please adjust your filters and try
-                                    again.
-                                </p>
-                            )}
-                        </div>
-
-                        {/* Pagination */}
-                        <div className="flex items-center justify-center gap-2 pt-10">
-                            <button className="w-12 h-12 rounded-xl border border-[#534438]/20 flex items-center justify-center text-white hover:border-[#ffb77e] hover:text-[#ffb77e] transition-all">
-                                <Icon name="chevron_left" size={24} />
-                            </button>
-                            <div className="flex gap-2">
-                                <button className="w-12 h-12 rounded-xl bg-[#ffb77e] text-[#0B1120] font-bold flex items-center justify-center">
-                                    1
-                                </button>
-                                <button className="w-12 h-12 rounded-xl border border-[#534438]/20 text-white hover:bg-[#19120d] transition-all flex items-center justify-center font-bold">
-                                    2
-                                </button>
-                                <button className="w-12 h-12 rounded-xl border border-[#534438]/20 text-white hover:bg-[#19120d] transition-all flex items-center justify-center font-bold">
-                                    3
-                                </button>
-                                <span className="w-12 h-12 flex items-center justify-center text-[#d9c2b3]">...</span>
-                                <button className="w-12 h-12 rounded-xl border border-[#534438]/20 text-white hover:bg-[#19120d] transition-all flex items-center justify-center font-bold">
-                                    12
-                                </button>
-                            </div>
-                            <button className="w-12 h-12 rounded-xl border border-[#534438]/20 flex items-center justify-center text-white hover:border-[#ffb77e] hover:text-[#ffb77e] transition-all">
-                                <Icon name="chevron_right" size={24} />
-                            </button>
+                {/* Main Content */}
+                <div className="flex-1 space-y-6">
+                    <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                        <div>
+                            <h2 className="font-bold text-[32px] text-[#ffb77e]">Luxury Estates</h2>
+                            <p className="text-[#d9c2b3] text-[16px]">
+                                {total} properties found
+                                {location && ` in "${location}"`}
+                                {type && type !== "All" && ` · ${type}`}
+                            </p>
                         </div>
                     </div>
-                </main>
 
-                {/* <Footer /> */}
-                {/* <BottomNavBar /> */}
-            </div>
-        </>
+                    {/* Property Grid */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                        {allProperties.map((prop) => (
+                            <PropertyCard key={prop._id} {...prop} />
+                        ))}
+                        {allProperties.length === 0 && (
+                            <p className="text-center mt-20 text-[#d9c2b3] col-span-full">
+                                No properties found. Try adjusting your filters.
+                            </p>
+                        )}
+                    </div>
+
+                    {/* Pagination — filters preserve হবে */}
+                    {totalPages > 1 && (
+                        <div className="flex items-center justify-center gap-2 pt-10">
+                            <Link
+                                href={buildPageUrl(currentPage - 1)}
+                                className={`w-12 h-12 rounded-xl border border-[#534438]/20 flex items-center justify-center text-white hover:border-[#ffb77e] hover:text-[#ffb77e] transition-all ${
+                                    currentPage === 1 ? "pointer-events-none opacity-30" : ""
+                                }`}
+                            >
+                                <Icon name="chevron_left" size={24} />
+                            </Link>
+
+                            <div className="flex gap-2">
+                                {getPageNumbers(currentPage, totalPages).map((p, i) =>
+                                    p === "..." ? (
+                                        <span
+                                            key={`d${i}`}
+                                            className="w-12 h-12 flex items-center justify-center text-[#d9c2b3]"
+                                        >
+                                            ...
+                                        </span>
+                                    ) : (
+                                        <Link
+                                            key={p}
+                                            href={buildPageUrl(p)}
+                                            className={`w-12 h-12 rounded-xl font-bold flex items-center justify-center transition-all ${
+                                                currentPage === p
+                                                    ? "bg-[#ffb77e] text-[#0B1120]"
+                                                    : "border border-[#534438]/20 text-white hover:bg-[#19120d]"
+                                            }`}
+                                        >
+                                            {p}
+                                        </Link>
+                                    )
+                                )}
+                            </div>
+
+                            <Link
+                                href={buildPageUrl(currentPage + 1)}
+                                className={`w-12 h-12 rounded-xl border border-[#534438]/20 flex items-center justify-center text-white hover:border-[#ffb77e] hover:text-[#ffb77e] transition-all ${
+                                    currentPage === totalPages ? "pointer-events-none opacity-30" : ""
+                                }`}
+                            >
+                                <Icon name="chevron_right" size={24} />
+                            </Link>
+                        </div>
+                    )}
+                </div>
+            </main>
+        </div>
     )
 }
 
