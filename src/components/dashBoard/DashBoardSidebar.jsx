@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import Icon from "../Icon"
-import { ArrowLeft } from "@gravity-ui/icons"
+import { ArrowLeft, CirclePlusFill } from "@gravity-ui/icons"
 
 export default function DashboardSidebar({ role = "owner" }) {
     const pathname = usePathname()
@@ -18,22 +18,22 @@ export default function DashboardSidebar({ role = "owner" }) {
     const navLinks = {
         owner: [
             { name: "Dashboard", href: "/dashboard/owner", icon: "dashboard" },
-            { name: "Add Property", href: "/dashboard/owner/add-property", icon: "add" },
+            { name: "Add Property", href: "/dashboard/owner/add-property", icon: "add_circle" },
             { name: "Booking Requests", href: "/dashboard/owner/booking-requests", icon: "analytics" },
             { name: "My Properties", href: "/dashboard/owner/my-properties", icon: "home" },
             { name: "Profile", href: "/dashboard/owner/profile", icon: "person" }
         ],
         tenant: [
-            { name: "Dashboard", href: "/dashboard/tenant", icon: "dashboard" },
+            // { name: "Dashboard", href: "/dashboard/tenant", icon: "dashboard" },
             { name: "My Bookings", href: "/dashboard/tenant/my-bookings", icon: "home" },
             { name: "Favorites", href: "/dashboard/tenant/favorites", icon: "favorite" },
             { name: "Profile", href: "/dashboard/tenant/profile", icon: "person" }
         ],
         admin: [
-            { name: "Dashboard", href: "/dashboard/admin", icon: "dashboard" },
+            // { name: "Dashboard", href: "/dashboard/admin", icon: "dashboard" },
             { name: "Booking Management", href: "/dashboard/admin/bookings", icon: "calendar_today" },
             { name: "Properties", href: "/dashboard/admin/properties", icon: "real_estate_agent" },
-            { name: "Transactions", href: "/dashboard/admin/transactions", icon: "account_balance" },
+            { name: "Transactions", href: "/dashboard/admin/transactions", icon: "favorite" },
             { name: "Users", href: "/dashboard/admin/users", icon: "group" }
         ]
     }

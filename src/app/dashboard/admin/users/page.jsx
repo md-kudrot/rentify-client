@@ -229,15 +229,7 @@ export default function AdminUsersPage() {
                             {/* User Info */}
                             <div className="flex items-center gap-4 p-4 bg-[#211a15] rounded-2xl">
                                 <div className="w-12 h-12 rounded-full overflow-hidden bg-[#302823] flex items-center justify-center text-[#ffb77e] font-bold flex-shrink-0">
-                                    {selectedUser.image ? (
-                                        <img
-                                            src={selectedUser.image}
-                                            alt={selectedUser.name}
-                                            className="w-full h-full object-cover"
-                                        />
-                                    ) : (
-                                        selectedUser.name?.charAt(0).toUpperCase()
-                                    )}
+                                    {selectedUser.image && selectedUser.name?.charAt(0).toUpperCase()}
                                 </div>
                                 <div>
                                     <div className="font-bold text-[#efe0d7]">{selectedUser.name}</div>

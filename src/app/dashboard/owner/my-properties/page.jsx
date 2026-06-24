@@ -329,7 +329,7 @@ export default function MyPropertiesPage() {
             {/* ── Feedback Modal ── */}
             {isModalOpen && (
                 <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[200] flex items-center justify-center p-4">
-                    <div className="bg-[#19120d] border border-red-500/30 rounded-3xl w-full max-w-md overflow-hidden shadow-2xl">
+                    <div className="bg-[#19120d] border border-red-500/30 rounded-3xl w-1/3 overflow-hidden shadow-2xl">
                         <div className="p-6 border-b border-[#534438]/20 flex justify-between items-center bg-[#211a15]">
                             <h3 className="text-xl font-bold text-red-400 flex items-center gap-2">
                                 <Icon name="warning" size={24} /> Rejection Feedback
