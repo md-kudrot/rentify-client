@@ -174,15 +174,7 @@ export default function AdminUsersPage() {
                                         <td className="px-6 py-4">
                                             <div className="flex items-center gap-4">
                                                 <div className="w-10 h-10 rounded-full overflow-hidden bg-[#302823] flex items-center justify-center text-[#ffb77e] font-bold flex-shrink-0">
-                                                    {user.image ? (
-                                                        <img
-                                                            src={user.image}
-                                                            alt={user.name}
-                                                            className="w-full h-full object-cover"
-                                                        />
-                                                    ) : (
-                                                        user.name?.charAt(0).toUpperCase()
-                                                    )}
+                                                    {user.image && user.name?.charAt(0).toUpperCase()}
                                                 </div>
                                                 <div>
                                                     <div className="text-sm font-bold text-[#efe0d7]">{user.name}</div>
