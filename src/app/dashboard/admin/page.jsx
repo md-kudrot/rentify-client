@@ -1,4 +1,3 @@
-import DashboardLayout from "@/../src/app/dashboard/layout"
 import SummaryCards from "@/components/dashboard/SummaryCards"
 import RevenueChart from "@/components/dashboard/RevenueChart"
 import Icon from "@/components/Icon"

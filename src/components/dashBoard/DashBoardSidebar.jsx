@@ -31,10 +31,10 @@ export default function DashboardSidebar({ role = "owner" }) {
         ],
         admin: [
             { name: "Dashboard", href: "/dashboard/admin", icon: "dashboard" },
-            { name: "Users", href: "/dashboard/admin/users", icon: "group" },
+            { name: "Booking Management", href: "/dashboard/admin/bookings", icon: "calendar_today" },
             { name: "Properties", href: "/dashboard/admin/properties", icon: "real_estate_agent" },
-            { name: "Financials", href: "/dashboard/admin/financials", icon: "account_balance" },
-            { name: "Settings", href: "/dashboard/admin/settings", icon: "settings" }
+            { name: "Transactions", href: "/dashboard/admin/transactions", icon: "account_balance" },
+            { name: "Users", href: "/dashboard/admin/users", icon: "group" }
         ]
     }
 
