@@ -9,6 +9,10 @@ export default function PropertyHeader({ property }) {
     const [animateHeart, setAnimateHeart] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
 
+    const { data: session } = authClient.useSession()
+    const user = session?.user
+    const userRole = user?.role
+
     // Initialize from property data
     useEffect(() => {
         if (property?.isFavorite !== undefined) {
@@ -86,20 +90,19 @@ export default function PropertyHeader({ property }) {
                 </div>
             </div>
             <div className="flex items-center gap-4">
-                <button
-                    onClick={toggleFavorite}
-                    disabled={isLoading}
-                    className="w-12 h-12 rounded-full border border-[#534438]/30 flex items-center justify-center text-[#ffb77e] hover:bg-[#ffb77e]/5 transition-all group active:scale-90 relative disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                    <Icon
-                        name={isFavorited ? "favorite_filled" : "favorite"}
-                        size={20}
-                        className={`group-hover:scale-110 transition-transform ${animateHeart ? "animate-ping" : ""}`}
-                    />
-                </button>
-                <button className="w-12 h-12 rounded-full border border-[#534438]/30 flex items-center justify-center text-[#d9c2b3] hover:text-[#ffb77e] transition-all active:scale-90">
-                    <Icon name="ios_share" size={20} />
-                </button>
+                {userRole === "tenant" && (
+                    <button
+                        onClick={toggleFavorite}
+                        disabled={isLoading}
+                        className="w-12 h-12 rounded-full border border-[#534438]/30 flex items-center justify-center text-[#ffb77e] hover:bg-[#ffb77e]/5 transition-all group active:scale-90 relative disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                        <Icon
+                            name={isFavorited ? "favorite_filled" : "favorite"}
+                            size={20}
+                            className={`group-hover:scale-110 transition-transform ${animateHeart ? "animate-ping" : ""}`}
+                        />
+                    </button>
+                )}
             </div>
         </div>
     )

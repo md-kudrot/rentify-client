@@ -3,8 +3,8 @@ import PropertyCard from "@/components/PropertyCard"
 import Link from "next/link"
 import Icon from "@/components/Icon"
 import { headers } from "next/headers"
-import { auth } from "@/lib/auth"
 import FilterControls from "@/components/filter/FilterControls"
+import { auth } from "@/lib/auth"
 
 export default async function PropertiesPage({ searchParams }) {
     const params = await searchParams
@@ -25,10 +25,26 @@ export default async function PropertiesPage({ searchParams }) {
     let total = 0
 
     try {
-        const res = await fetch(`${process.env.Server_URL}/api/properties/public?${query.toString()}`, {
-            cache: "no-store"
+        const tokenObj = await auth.api.getToken({
+            headers: await headers()
         })
+        const token = tokenObj?.token
+        // console.log("Auth token:", token)
+        const res = await fetch(`${process.env.Server_URL}/api/properties/public?${query.toString()}`, {
+            cache: "no-store",
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+
+        if (!res.ok) {
+            console.error("API Error Status:", res.status)
+            console.error("API Error Body:", await res.text())
+            throw new Error(`API returned ${res.status}`)
+        }
+
         const data = await res.json()
+        // console.log("API Response:", JSON.stringify(data, null, 2))
         allProperties = data.properties
         totalPages = data.pagination.totalPages
         total = data.pagination.total
