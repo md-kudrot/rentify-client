@@ -21,14 +21,7 @@ function getIconForAmenity(label = "") {
     return match?.icon ?? "star" // fallback icon
 }
 
-const DEFAULT_AMENITIES = [
-    "Infinity Pool",
-    "Private Cinema",
-    "Gourmet Kitchen",
-    "Smart Home System",
-    "Fitness Center",
-    "Outdoor Lounge"
-]
+const DEFAULT_AMENITIES = ["Infinity Pool"]
 
 export default function AmenitiesSection({ property }) {
     const amenities = property?.premiumAmenities?.length ? property.premiumAmenities : DEFAULT_AMENITIES
