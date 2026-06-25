@@ -47,8 +47,8 @@ export default async function PropertyDetailsPage({ params }) {
                         <FeaturesRibbon property={property} />
                         <AboutSection property={property} />
                         <AmenitiesSection property={property} />
-                        <HostCard host={property?.host} />
-                        <ReviewsSection reviews={property?.reviews} />
+                        {/* <HostCard host={property?.host} /> */}
+                        <ReviewsSection propertyId={property._id.toString()} />
                     </div>
 
                     <div className="lg:col-span-4 relative">

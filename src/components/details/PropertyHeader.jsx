@@ -75,9 +75,9 @@ export default function PropertyHeader({ property }) {
                     </span>
                     <div className="flex items-center gap-1 text-[#ffb77e]">
                         <Icon name="star_filled" size={16} />
-                        <span className="font-bold text-[14px]">{property?.reviews.averageRating || "4.98"}</span>
+                        <span className="font-bold text-[14px]">{property?.reviews.averageRating || "0"}</span>
                         <span className="text-[#d9c2b3] font-normal text-[14px] ml-1">
-                            ({property?.reviews.totalReviews || 124} reviews)
+                            ({property?.reviews.totalReviews || "0"} reviews)
                         </span>
                     </div>
                 </div>

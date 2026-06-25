@@ -128,7 +128,7 @@ export default function FilterControls() {
                     </div>
                     <button
                         onClick={applyFilters}
-                        className="w-full py-4 copper-gradient text-white bg-accent/8 font-bold rounded-xl shadow-lg hover:scale-[1.02] active:scale-95 transition-all mt-10"
+                        className="w-full py-4 copper-gradient bg-[#ffb77e] text-[#0B1120] cursor-pointer font-bold rounded-xl shadow-lg hover:scale-[1.02] active:scale-95 transition-all mt-10"
                     >
                         Apply Filters
                     </button>
