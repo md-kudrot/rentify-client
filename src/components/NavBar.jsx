@@ -4,6 +4,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { authClient } from "@/lib/auth-client"
 import { redirect, usePathname } from "next/navigation"
+import Icon from "./Icon"
 
 export default function Navbar() {
     const pathname = usePathname()
@@ -39,12 +40,18 @@ export default function Navbar() {
     const navLinks = (
         <>
             <Link
-                href="/properties"
-                className="text-[#d9c2b3] font-bold text-[14px] hover:text-[#ffb77e] transition-colors"
+                href="/"
+                className={`text-[#d9c2b3] ${pathname === "/" ? "text-[#ffb77e]" : ""} font-bold text-[14px] hover:text-[#ffb77e] transition-colors`}
             >
-                Properties
+                Home
             </Link>
-            <Link href="/saved" className="text-[#d9c2b3] text-[14px] hover:text-[#ffb77e] transition-colors">
+            <Link
+                href="/properties"
+                className={`text-[#d9c2b3] ${pathname === "/properties" ? "text-[#ffb77e]" : ""} font-bold text-[14px] hover:text-[#ffb77e] transition-colors`}
+            >
+                All Properties
+            </Link>
+            {/* <Link href="/saved" className="text-[#d9c2b3] text-[14px] hover:text-[#ffb77e] transition-colors">
                 Saved
             </Link>
             <Link href="/bookings" className="text-[#d9c2b3] text-[14px] hover:text-[#ffb77e] transition-colors">
@@ -52,7 +59,7 @@ export default function Navbar() {
             </Link>
             <Link href="/investments" className="text-[#d9c2b3] text-[14px] hover:text-[#ffb77e] transition-colors">
                 Investments
-            </Link>
+            </Link> */}
         </>
     )
 
@@ -61,7 +68,10 @@ export default function Navbar() {
             <div className="flex justify-between items-center px-6 h-16 w-full max-w-[1280px] mx-auto">
                 <div className="flex items-center gap-4">
                     <Link href="/" className="font-bold text-[24px] tracking-tight text-[#ffb77e]">
-                        Rentify
+                        <div className="flex items-center gap-2 text-[#ffb77e]">
+                            <Icon name="home" size={28} />
+                            <h1 className="font-bold text-[24px] tracking-tight">Rentify</h1>
+                        </div>
                     </Link>
                 </div>
                 <nav className="hidden md:flex gap-6">{navLinks}</nav>

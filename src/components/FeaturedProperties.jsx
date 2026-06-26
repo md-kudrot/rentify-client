@@ -104,9 +104,7 @@ export default async function FeaturedProperties() {
                         <ArrowRight width={14} height={14} />
                     </Link>
                 </div>
-                <p className="text-white">
-                    Failed to load latest properties. Please try again {error.message}
-                </p>
+                <p className="text-white">Failed to load latest properties. Please try again {error.message}</p>
             </section>
         )
     }
@@ -136,5 +134,4 @@ export default async function FeaturedProperties() {
         </section>
     )
 }
-
 

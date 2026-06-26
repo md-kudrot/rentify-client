@@ -20,9 +20,6 @@ export default function DashboardHeader({ role }) {
     return (
         <header className="h-16 sticky top-0 bg-surface/80 backdrop-blur-xl z-50 border-b border-outline-variant/10 px-lg flex items-center justify-between">
             <div className="flex items-center gap-md">
-                <button className="lg:hidden text-primary">
-                    <Icon name="menu" size={24} />
-                </button>
                 <h1 className="font-headline-md text-on-surface hidden md:block">{titles[role] || "Dashboard"}</h1>
             </div>
             <div className="flex items-center gap-lg">

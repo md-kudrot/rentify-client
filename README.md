@@ -1,36 +1,30 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Rentify
 
-## Getting Started
+## Purpose
 
-First, run the development server:
+A modern, modular, and responsive frontend application for the Rentora Luxury Real Estate property management platform. It offers premium, role-based dashboards tailored for Owners, Tenants, and Admins to manage properties, bookings, and profiles efficiently.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Live URL
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+[Insert Live URL Here]
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Key Features
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Role-based Dashboards**: Dedicated views and functionalities for Owners, Tenants, and Admins.
+- **Premium Design**: Built with Tailwind CSS v4 and HeroUI for a luxurious, responsive, and consistent SaaS interface.
+- **Property Management**: Dedicated pages for My Properties, Property Details, and Add Property features.
+- **Interactive UI Components**: Utilizes standard iconography, smooth animations, and interactive charts for a dynamic user experience.
+- **Optimized Performance**: Leverages Next.js 16 and React 19 for fast rendering and seamless navigation.
 
-## Learn More
+## NPM Packages
 
-To learn more about Next.js, take a look at the following resources:
+- `next` (16.2.9)
+- `react` (19.2.4)
+- `react-dom` (19.2.4)
+- `@heroui/react` (^3.2.1)
+- `@gravity-ui/icons` (^2.18.0)
+- `framer-motion` (^12.40.0)
+- `recharts` (^3.8.1)
+- `tailwindcss` (^4)
+- `@tailwindcss/postcss` (^4)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

@@ -78,7 +78,7 @@ export default async function PropertiesPage({ searchParams }) {
 
     return (
         <div className="bg-[#0B1120] text-white min-h-screen text-[16px] md:pt-0 pt-20 overflow-x-hidden">
-            <main className="pt-24 pb-20 px-6 max-w-[1280px] mx-auto  flex  lg:flex-row gap-6">
+            <main className="pt-24 pb-20 px-6 max-w-[1280px] mx-auto  flex flex-wrap  lg:flex-row gap-6">
                 {/* FilterControls — Sidebar + Sort Dropdown একসাথে */}
                 <Suspense fallback={<div className="w-72" />}>
                     <FilterControls />

@@ -45,7 +45,7 @@ export default function FilterControls() {
     return (
         <div className="">
             {/* ── SIDEBAR (Desktop) ── */}
-            <aside className="hidden lg:block w-72 shrink-0">
+            <aside className="  w-72 shrink-0">
                 <div className="sticky top-24 space-y-6">
                     <div className="flex flex-col gap-2 text-[#ffb77e] mb-4">
                         <Button
