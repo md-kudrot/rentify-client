@@ -86,7 +86,7 @@ export default function BookingRequestsPage() {
             try {
                 setLoading(true)
                 const email = session.user.email
-                console.log(email)
+                // console.log(email)
 
                 const { data: tokenData } = await authClient.token()
                 const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/bookings/owner/${email}`, {
@@ -98,7 +98,7 @@ export default function BookingRequestsPage() {
                 if (!res.ok) throw new Error("Failed to fetch bookings")
 
                 const data = await res.json()
-                console.log(data)
+                // console.log(data)
                 setBookings(data)
             } catch (err) {
                 setError(err.message)

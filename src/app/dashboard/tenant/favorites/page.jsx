@@ -66,7 +66,7 @@ export default function FavoritesPage() {
             }
 
             setFavorites(favorites.filter((fav) => fav._id !== propertyId))
-            console.log("Property removed from favorites")
+            // console.log("Property removed from favorites")
         } catch (err) {
             console.error("Error removing favorite:", err)
             alert("Failed to remove from favorites")
@@ -183,3 +183,4 @@ export default function FavoritesPage() {
         </div>
     )
 }
+

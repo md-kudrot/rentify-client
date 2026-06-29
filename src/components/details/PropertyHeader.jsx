@@ -58,7 +58,7 @@ export default function PropertyHeader({ property }) {
                 setTimeout(() => setAnimateHeart(false), 400)
             }
 
-            console.log(`Property ${newState ? "added to" : "removed from"} favorites:`, property?.title)
+            // console.log(`Property ${newState ? "added to" : "removed from"} favorites:`, property?.title)
         } catch (error) {
             console.error("Error toggling favorite:", error)
         } finally {

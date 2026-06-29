@@ -18,7 +18,7 @@ export default async function PropertyDetailsPage({ params }) {
         headers: await headers()
     })
 
-    const res = await fetch(`${process.env.SERVER_URL}/api/properties/${id}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/properties/${id}`, {
         cache: "no-store",
         headers: {
             authorization: `Bearer ${token}`
@@ -35,7 +35,7 @@ export default async function PropertyDetailsPage({ params }) {
     }
 
     const property = await res.json()
-    console.log("Fetched property details:", property)
+    // console.log("Fetched property details:", property)
     return (
         <div className="overflow-x-hidden min-h-screen pb-20 md:pb-0">
             <main className="pt-24 pb-20 px-6 max-w-[1280px] mx-auto space-y-10">

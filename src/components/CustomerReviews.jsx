@@ -3,7 +3,7 @@ import { StarFill } from "@gravity-ui/icons"
 
 async function getTopReviews() {
     try {
-        const res = await fetch(`${process.env.Server_URL}/api/reviews/top`, { cache: "no-store" })
+        const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/reviews/top`, { cache: "no-store" })
         const data = await res.json()
         return data.reviews || []
     } catch {

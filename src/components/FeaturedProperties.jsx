@@ -81,10 +81,10 @@ export default async function FeaturedProperties() {
 
     let latestProperties = []
     try {
-        const res = await fetch(`${process.env.Server_URL}/api/properties/latest`)
+        const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/properties/latest`)
         latestProperties = await res.json()
 
-        console.log(latestProperties)
+        // console.log(latestProperties)
     } catch (error) {
         console.error("Error fetching latest properties:", error)
         return (

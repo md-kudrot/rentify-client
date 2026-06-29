@@ -24,7 +24,7 @@ export default function Navbar() {
     // console.log(session?.user)
     const user = session?.user
 
-    console.log("user roll", user?.role)
+    // console.log("user roll", user?.role)
 
     const handleSignOut = async () => {
         await authClient.signOut({

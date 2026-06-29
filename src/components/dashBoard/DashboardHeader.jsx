@@ -15,7 +15,7 @@ export default function DashboardHeader({ role }) {
     // console.log(session);
 
     const user = session?.user
-    console.log(user)
+    // console.log(user)
 
     return (
         <header className="h-16 sticky top-0 bg-surface/80 backdrop-blur-xl z-50 border-b border-outline-variant/10 px-lg flex items-center justify-between">

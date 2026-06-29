@@ -121,7 +121,7 @@ export default function Footer() {
                 </div>
             </div>
             <div className="max-w-[1280px] mx-auto px-6 py-6 border-t border-[#534438]/10 flex flex-col md:flex-row justify-between items-center text-[#d9c2b3] text-[14px] font-medium gap-4">
-                <p>© 2024 Rentora Luxury Estates. All rights reserved.</p>
+                <p>© 2026 Rentora Luxury Estates. All rights reserved.</p>
                 <div className="flex gap-6">
                     <a className="hover:text-[#ffb77e] transition-all" href="#">
                         Privacy Policy

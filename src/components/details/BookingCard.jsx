@@ -20,7 +20,7 @@ export default function BookingCard({ property }) {
     const user = session?.user
     const userRole = user?.role
 
-    console.log(property?.ownerEmail)
+    // console.log(property?.ownerEmail)
 
     return (
         <div className="sticky top-24 glass-panel bg-gradient-to-b from-[#0B1120] to-[#1a202c] p-10 rounded-[24px] shadow-2xl space-y-6">

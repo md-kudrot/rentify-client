@@ -27,7 +27,7 @@ export default function SignUpPage() {
             role: "tenant"
         })
         if (data) {
-            console.log("signup success ")
+            // console.log("signup success ")
             redirect("/")
         }
 

@@ -30,7 +30,7 @@ export default async function PropertiesPage({ searchParams }) {
         })
         const token = tokenObj?.token
         // console.log("Auth token:", token)
-        const res = await fetch(`${process.env.Server_URL}/api/properties/public?${query.toString()}`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/properties/public?${query.toString()}`, {
             cache: "no-store",
             headers: {
                 Authorization: `Bearer ${token}`

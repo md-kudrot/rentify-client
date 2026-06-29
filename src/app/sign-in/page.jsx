@@ -1,13 +1,14 @@
 "use client"
 
-import React, { useState } from "react"
+import React, { useState, Suspense } from "react"
 import { Envelope, ShieldKeyhole, Eye, EyeSlash } from "@gravity-ui/icons"
 import { motion } from "framer-motion"
 import Link from "next/link"
 import { authClient } from "@/lib/auth-client"
 import { useRouter, useSearchParams } from "next/navigation"
 
-export default function Page() {
+// ✅ useSearchParams আলাদা component এ
+function SignInContent() {
     const searchParams = useSearchParams()
     const callbackUrl = searchParams.get("callbackUrl") || "/"
     const router = useRouter()
@@ -27,7 +28,7 @@ export default function Page() {
 
         if (data) {
             alert("Logged in successfully!")
-            router.push(callbackUrl)
+            router.push("/")
         }
 
         if (error) {
@@ -44,7 +45,6 @@ export default function Page() {
 
     return (
         <div className="min-h-screen flex items-center justify-center mt-10 bg-[#0B1120] relative overflow-hidden">
-            {/* Background ambient decorations */}
             <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0 pointer-events-none">
                 <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-[#C97B36]/10 blur-[100px] rounded-full mix-blend-screen" />
                 <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-[#139fb3]/10 blur-[100px] rounded-full mix-blend-screen" />
@@ -54,9 +54,9 @@ export default function Page() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
-                className="lg:w-[25%]  z-10"
+                className="lg:w-[25%] z-10"
             >
-                <div className=" rounded-[32px]  w-full flex flex-col gap-6">
+                <div className="rounded-[32px] w-full flex flex-col gap-6">
                     <div className="text-center">
                         <h1 className="text-[28px] font-bold tracking-tight text-white">Welcome Back</h1>
                         <p className="text-[#d9c2b3] mt-2 text-sm">Sign in to your account to continue</p>
@@ -185,6 +185,15 @@ export default function Page() {
                 </div>
             </motion.div>
         </div>
+    )
+}
+
+// ✅ Page component — Suspense দিয়ে wrap
+export default function Page() {
+    return (
+        <Suspense fallback={null}>
+            <SignInContent />
+        </Suspense>
     )
 }
 
