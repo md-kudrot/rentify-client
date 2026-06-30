@@ -6,7 +6,10 @@ A modern, modular, and responsive frontend application for the Rentora Luxury Re
 
 ## Live URL
 
-[https://rentify-beige-rho.vercel.app]
+https://rentify-beige-rho.vercel.app
+
+<img width="1907" height="917" alt="image" src="https://github.com/user-attachments/assets/376a90d7-7a1c-4622-b2b8-9b18612a3e0d" />
+
 
 ## Key Features
 
